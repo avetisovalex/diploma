@@ -104,12 +104,14 @@
 		BoxLayout:
 			orientation: 'horizontal'
 			spacing:self.width*0.12
-			Button:
+			ToggleButton:
+				group:'space'
 #				background_normal:'adddd.png'
 #				background_down:'add_down.png'
 			Label:
 				size_hint: 2, 1
-			Button:
+			ToggleButton:
+				group:'space'
 		Button:
             text: 'Зарегистрироваться'
 			on_release: root.register()
@@ -180,6 +182,7 @@
 			orientation: 'vertical'
 			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
 			spacing: self.height*0.02
+			ScrollView:
 			
 <TaskEditScreen>:
     BoxLayout:
@@ -209,7 +212,16 @@
 			orientation: 'vertical'
 			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
 			spacing: self.height*0.02
-
+			TextInput:
+				hint_text:'Title'
+			ScrollView:
+				size_hint:4,1
+			Label:
+				text:'Выберите пользователей, которым\nбудет доступно задание и которые будут уведомлены по смс'
+			GridLayout:
+				cols:3
+				id:grid
+				
 <ProductsScreen>:
     BoxLayout:
 		orientation: 'vertical'

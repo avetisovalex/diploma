@@ -87,7 +87,10 @@ class MainScreen(Screen):
 class TasksScreen(Screen):
     pass
 class TaskEditScreen(Screen):
-    pass
+	
+	def on_pre_enter(self):
+		self.ids.grid.add_widget(Label(text='hdjlg'))
+    
 class ProductsScreen(Screen):
     pass
 class ProductsInfScreen(Screen):
@@ -131,7 +134,7 @@ class DipApp(App):
 		sm.add_widget(StatisticsScreen(name='statistics'))
 		sm.add_widget(MenuScreen(name='menu'))
 		sm.add_widget(AboutScreen(name='about'))
-		sm.current = 'main'
+		sm.current = 'login'
 		return sm
 		
 	
