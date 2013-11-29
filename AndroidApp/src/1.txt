@@ -1,0 +1,4 @@
+Маша,9034444444,mary@gmail.com
+Мама,7778889955,nata@gmail.com
+Брат,1118883399,alex@gmail.com
+Дедушка,1118883399,grandfa@gmail.com

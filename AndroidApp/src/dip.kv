@@ -1,36 +1,38 @@
 ﻿#coding=utf-8
 #:kivy 1.0.4
 #:import os os
-#:import TextInput kivy.uix.textinput
+
 
 
 #self.height*0.1
 #self.width*0.1
 <LoginScreen>:	
-	
 	BoxLayout:
 		orientation: 'vertical'
 		padding: self.width*0.15,self.height*0.1,self.width*0.15,self.height*0.1
 		spacing: self.height*0.02
 		Image:
 			size_hint:1,7
-			source:"1.png"
+			source:'1.png'
 			allow_stretch:True
 		TextInput:
-			hint_text: "user name"
+			hint_text: 'user name'
+			id:'user name'
 			multiline: False
 		TextInput:
 			hint_text:'password'
+			id:'password'
 			multiline: False
 			password:True
 		BoxLayout:
 			orientation: 'horizontal'
 			CheckBox:
+				id:'check'
 			Label:
 				size_hint: 6, 1
 			Label:
 				size_hint: 4, 1
-				text: "Запомнить"
+				text: 'Запомнить'
 	    Button:
 			text: 'Войти в систему'
 			on_release: root.enter_system()
@@ -54,20 +56,25 @@
 			halign: 'center'
 			text: 'Пожалуйста, введите информацию\nо вашей учетной записи'
 		TextInput:
-			hint_text: "user name*"
+			hint_text: 'user name*'
+			id:'name'
 			readonly: False
 			multiline: False
 		TextInput:
 			hint_text:'e-mail*'
+			id:'e-mail'
 			multiline: False
 		TextInput:
 			hint_text:'password*'
+			id:'password'
 			multiline: False
 		TextInput:
 			hint_text:'re-enter password*'
+			id:'re_password'
 			multiline: False
 		TextInput:
 			hint_text:'+7 911 111-11-11'
+			id:'phone'
 			multiline: False
 		BoxLayout:
 			orientation: 'horizontal'
@@ -78,16 +85,20 @@
 				on_release: root.code_sms()
 			TextInput:
 				hint_text:'1111'
+				id:'code'
 				size_hint: 3, 1
 			CheckBox:
+				id:'code_check'
 		Label:
 			halign: 'center'
-			text: "Пожалуйста, введите данные\nобщего пространства"
+			text: 'Пожалуйста, введите данные\nобщего пространства'
 		TextInput:
-			hint_text: "name"
+			hint_text: 'name'
+			id:'space_name'
 			multiline: False
 		TextInput:
 			hint_text:'password'
+			id:'space_password'
 			multiline:False
 			password:True
 #		GridLayout:
@@ -105,13 +116,18 @@
 			orientation: 'horizontal'
 			spacing:self.width*0.12
 			ToggleButton:
+				text:'New'
 				group:'space'
+				background_normal: 'atlas://images/1/myatlas/button'
+				id:'new_space'
 #				background_normal:'adddd.png'
 #				background_down:'add_down.png'
 			Label:
 				size_hint: 2, 1
 			ToggleButton:
+				text:'Old'
 				group:'space'
+				id:'cur_space'
 		Button:
             text: 'Зарегистрироваться'
 			on_release: root.register()
@@ -135,7 +151,7 @@
 				text: 'Мой холодильник'
 				size_hint:.6,.5
 			Image:
-				source:"1.png"
+				source:'1.png'
 				size_hint:.2,.5
 				allow_stretch:True
 		BoxLayout:
@@ -174,7 +190,7 @@
 				text: 'Мои задания'
 				size_hint:.6,.5
 			Image:
-				source:"1.png"
+				source:'1.png'
 				size_hint:.2,.5
 				allow_stretch:True
 		BoxLayout:
@@ -204,7 +220,7 @@
 				text: 'Редактирование задания'
 				size_hint:.6,.5
 			Image:
-				source:"1.png"
+				source:'1.png'
 				size_hint:.2,.5
 				allow_stretch:True
 		BoxLayout:
@@ -214,13 +230,20 @@
 			spacing: self.height*0.02
 			TextInput:
 				hint_text:'Title'
+				size_hint:1,.3
 			ScrollView:
 				size_hint:4,1
 			Label:
-				text:'Выберите пользователей, которым\nбудет доступно задание и которые будут уведомлены по смс'
+				halign:'center'
+				text:'Выберите пользователей, которым\nбудет доступно задание и смс'
+				size_hint:1,0.5
 			GridLayout:
-				cols:3
+				cols:4
 				id:grid
+			Button:
+				size_hint:1,.3
+				text:'Создать'
+				on_release: root.create_task()
 				
 <ProductsScreen>:
     BoxLayout:
@@ -242,7 +265,7 @@
 				text: 'Мои продукты'
 				size_hint:.6,.5
 			Image:
-				source:"1.png"
+				source:'1.png'
 				size_hint:.2,.5
 				allow_stretch:True
 		BoxLayout:
@@ -271,7 +294,7 @@
 				text: 'Информация о продукте'
 				size_hint:.6,.5
 			Image:
-				source:"1.png"
+				source:'1.png'
 				size_hint:.2,.5
 				allow_stretch:True
 		BoxLayout:
@@ -308,7 +331,7 @@
 				text: 'Статистика'
 				size_hint:.6,.5
 			Image:
-				source:"1.png"
+				source:'1.png'
 				size_hint:.2,.5
 				allow_stretch:True
 		BoxLayout:
@@ -337,7 +360,7 @@
 				text: 'О программе'
 				size_hint:.6,.5
 			Image:
-				source:"1.png"
+				source:'1.png'
 				size_hint:.2,.5
 				allow_stretch:True
 		FloatLayout:
@@ -352,8 +375,14 @@
 				text:'Это приложение поможет Вам\nудобно и эффективно управлять\nсодержимым своего холодильника'
 <MenuScreen>:
 	StackLayout:
-        orientation:'lr-tb'
+	    orientation:'lr-tb'
 		minimum_width: .7
+		canvas:
+			Color:
+				rgb: 0.345, 0.345, 0.345
+			Rectangle:
+				pos: self.pos
+				size: self.size
 		Button:
             text: 'User'
 			size_hint: .5,.1
