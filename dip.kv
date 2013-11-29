@@ -1,0 +1,379 @@
+﻿#coding=utf-8
+#:kivy 1.0.4
+#:import os os
+#:import TextInput kivy.uix.textinput
+#:import ActionBar kivy.uix.actionbar
+
+#self.height*0.1
+#self.width*0.1
+<LoginScreen>:	
+	
+	BoxLayout:
+		orientation: 'vertical'
+		padding: self.width*0.15,self.height*0.1,self.width*0.15,self.height*0.1
+		spacing: self.height*0.02
+		Image:
+			size_hint:1,7
+			source:"1.png"
+			allow_stretch:True
+		TextInput:
+			hint_text: "user name"
+			multiline: False
+		TextInput:
+			hint_text:'password'
+			multiline: False
+			password:True
+		BoxLayout:
+			orientation: 'horizontal'
+			CheckBox:
+			Label:
+				size_hint: 6, 1
+			Label:
+				size_hint: 4, 1
+				text: "Запомнить"
+	    Button:
+			text: 'Войти в систему'
+			on_release: root.enter_system()
+        Button:
+            text: 'Зарегистрироваться'
+            on_release: root.reg()
+			
+<AuthorizationScreen>:
+	BoxLayout:
+		canvas:
+			Color:
+				rgb: 0, 0.3, 0.3
+			Line:
+				points: self.width*0.12,self.height*0.42,self.width*0.88,self.height*0.42
+				width: self.height*0.003
+				
+		orientation: 'vertical'
+		padding: self.width*0.15,self.height*0.03,self.width*0.15,self.height*0.03
+		spacing: self.height*0.02
+		Label:
+			halign: 'center'
+			text: 'Пожалуйста, введите информацию\nо вашей учетной записи'
+		TextInput:
+			hint_text: "user name*"
+			readonly: False
+			multiline: False
+		TextInput:
+			hint_text:'e-mail*'
+			multiline: False
+		TextInput:
+			hint_text:'password*'
+			multiline: False
+		TextInput:
+			hint_text:'re-enter password*'
+			multiline: False
+		TextInput:
+			hint_text:'+7 911 111-11-11'
+			multiline: False
+		BoxLayout:
+			orientation: 'horizontal'
+			spacing:self.width*0.12
+			Button:
+				text:'Смс-код'
+				size_hint: 5, 1
+				on_release: root.code_sms()
+			TextInput:
+				hint_text:'1111'
+				size_hint: 3, 1
+			CheckBox:
+		Label:
+			halign: 'center'
+			text: "Пожалуйста, введите данные\nобщего пространства"
+		TextInput:
+			hint_text: "name"
+			multiline: False
+		TextInput:
+			hint_text:'password'
+			multiline:False
+			password:True
+#		GridLayout:
+#			cols:2
+#			CheckBox:
+#				group:'space'
+#			Label:
+#				size_hint_x:5
+#				text:'Новое пространство'
+#			CheckBox:
+#				group:'space'
+#			Label:
+#				text:'Присоединиться'
+		BoxLayout:
+			orientation: 'horizontal'
+			spacing:self.width*0.12
+			Button:
+#				background_normal:'adddd.png'
+#				background_down:'add_down.png'
+			Label:
+				size_hint: 2, 1
+			Button:
+		Button:
+            text: 'Зарегистрироваться'
+			on_release: root.register()
+<MainScreen>:
+	BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgb: 0, 0.3, 0.3
+			Rectangle:
+				pos: 0, self.height*0.9
+				size: self.width,self.height*0.1
+		StackLayout:
+			size_hint:1,.2
+			orientation: 'tb-lr'
+			spacing:self.width*0.02
+			Button:
+				on_release:root.manager.current = 'menu'
+				size_hint:.2,.5
+			Label:
+				text: 'Мой холодильник'
+				size_hint:.6,.5
+			Image:
+				source:"1.png"
+				size_hint:.2,.5
+				allow_stretch:True
+		BoxLayout:
+			size_hint:1,.8
+			orientation: 'vertical'
+			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+			spacing: self.height*0.02
+			Label:
+				text:'Текущие задания'
+			ScrollView:
+				size_hint:1,4
+            Label:
+				text:'Продукты в холодильнике'
+			Spinner:
+				
+			ScrollView:
+				size_hint:1,4
+            
+<TasksScreen>:
+    BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgb: 0, 0.3, 0.3
+			Rectangle:
+				pos: 0, self.height*0.9
+				size: self.width,self.height*0.1
+		StackLayout:
+			size_hint:1,.2
+			orientation: 'tb-lr'
+			spacing:self.width*0.02
+			Button:
+				on_release:root.manager.current = 'menu'
+				size_hint:.2,.5
+			Label:
+				text: 'Мои задания'
+				size_hint:.6,.5
+			Image:
+				source:"1.png"
+				size_hint:.2,.5
+				allow_stretch:True
+		BoxLayout:
+			size_hint:1,.8
+			orientation: 'vertical'
+			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+			spacing: self.height*0.02
+			
+<TaskEditScreen>:
+    BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgb: 0, 0.3, 0.3
+			Rectangle:
+				pos: 0, self.height*0.9
+				size: self.width,self.height*0.1
+		StackLayout:
+			size_hint:1,.2
+			orientation: 'tb-lr'
+			spacing:self.width*0.02
+			Button:
+				on_release:root.manager.current = 'menu'
+				size_hint:.2,.5
+			Label:
+				text: 'Редактирование задания'
+				size_hint:.6,.5
+			Image:
+				source:"1.png"
+				size_hint:.2,.5
+				allow_stretch:True
+		BoxLayout:
+			size_hint:1,.8
+			orientation: 'vertical'
+			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+			spacing: self.height*0.02
+
+<ProductsScreen>:
+    BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgb: 0, 0.3, 0.3
+			Rectangle:
+				pos: 0, self.height*0.9
+				size: self.width,self.height*0.1
+		StackLayout:
+			size_hint:1,.2
+			orientation: 'tb-lr'
+			spacing:self.width*0.02
+			Button:
+				on_release:root.manager.current = 'menu'
+				size_hint:.2,.5
+			Label:
+				text: 'Мои продукты'
+				size_hint:.6,.5
+			Image:
+				source:"1.png"
+				size_hint:.2,.5
+				allow_stretch:True
+		BoxLayout:
+			size_hint:1,.8
+			orientation: 'vertical'
+			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+			spacing: self.height*0.02
+			
+<ProductsInfScreen>:
+    BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgb: 0, 0.3, 0.3
+			Rectangle:
+				pos: 0, self.height*0.9
+				size: self.width,self.height*0.1
+		StackLayout:
+			size_hint:1,.2
+			orientation: 'tb-lr'
+			spacing:self.width*0.02
+			Button:
+				on_release:root.manager.current = 'menu'
+				size_hint:.2,.5
+			Label:
+				text: 'Информация о продукте'
+				size_hint:.6,.5
+			Image:
+				source:"1.png"
+				size_hint:.2,.5
+				allow_stretch:True
+		BoxLayout:
+			size_hint:1,.8
+			orientation: 'vertical'
+			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+			spacing: self.height*0.02
+
+<SettingsScreen>:
+    BoxLayout:
+        Button:
+            text: 'Настройки'
+        Button:
+            text: 'Back to menu'
+            on_release: root.manager.current = 'menu'
+			
+<StatisticsScreen>:
+    BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgb: 0, 0.3, 0.3
+			Rectangle:
+				pos: 0, self.height*0.9
+				size: self.width,self.height*0.1
+		StackLayout:
+			size_hint:1,.2
+			orientation: 'tb-lr'
+			spacing:self.width*0.02
+			Button:
+				on_release:root.manager.current = 'menu'
+				size_hint:.2,.5
+			Label:
+				text: 'Статистика'
+				size_hint:.6,.5
+			Image:
+				source:"1.png"
+				size_hint:.2,.5
+				allow_stretch:True
+		BoxLayout:
+			size_hint:1,.8
+			orientation: 'vertical'
+			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+			spacing: self.height*0.02
+			
+<AboutScreen>:
+    BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgb: 0, 0.3, 0.3
+			Rectangle:
+				pos: 0, self.height*0.9
+				size: self.width,self.height*0.1
+		StackLayout:
+			size_hint:1,.2
+			orientation: 'tb-lr'
+			spacing:self.width*0.02
+			Button:
+				on_release:root.manager.current = 'menu'
+				size_hint:.2,.5
+			Label:
+				text: 'О программе'
+				size_hint:.6,.5
+			Image:
+				source:"1.png"
+				size_hint:.2,.5
+				allow_stretch:True
+		FloatLayout:
+			size_hint:1,.8
+#			orientation: 'vertical'
+#			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+#			spacing: self.height*0.02	
+			Label:
+				pos: 0,self.height*0.5
+#				size: .7,.7
+				valign:'top'
+				text:'Это приложение поможет Вам\nудобно и эффективно управлять\nсодержимым своего холодильника'
+<MenuScreen>:
+	StackLayout:
+        orientation:'lr-tb'
+		minimum_width: .7
+		Button:
+            text: 'User'
+			size_hint: .5,.1
+		Button:
+            text: 'Настр.'
+			size_hint: .2,.1
+			on_release: root.manager.current = 'settings'
+		Button:
+            text: 'Главная'
+			size_hint: .7,.1
+			on_release: root.manager.current = 'main'
+		Button:
+            text: 'Задания'
+			size_hint: .5,.1
+			on_release: root.manager.current = 'tasks'
+		Button:
+            text: 'Доб.'
+			size_hint: .2,.1
+			on_release: root.manager.current = 'task_edit'
+		Button:
+            text: 'Продукты'
+			size_hint: .7,.1
+			on_release: root.manager.current = 'products'
+		Button:
+            text: 'Статистика'
+			size_hint: .7,.1
+			on_release: root.manager.current = 'statistics'
+		Button:
+            text: 'О программе'
+			size_hint: .7,.1
+			on_release: root.manager.current = 'about'
+		Button:
+            text: 'Выйти'
+			size_hint: .7,.1
+			on_release: root.on_exit()	        
