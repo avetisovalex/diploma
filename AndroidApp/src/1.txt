@@ -1,4 +1,4 @@
-Маша,9034444444,mary@gmail.com
-Мама,7778889955,nata@gmail.com
-Брат,1118883399,alex@gmail.com
-Дедушка,1118883399,grandfa@gmail.com
+Mary,+7 903 444-44-44,mary@gmail.com,
+Mom,+7 777 888-99-55,nata@gmail.com,
+Brother,+7 111 888 33 99,alex@gmail.com,
+Grandfa,+7 111 888-33-99,grandfa@gmail.com,

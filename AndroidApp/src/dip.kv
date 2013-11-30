@@ -1,7 +1,7 @@
 ﻿#coding=utf-8
 #:kivy 1.0.4
 #:import os os
-
+#:import ScrollView kivy.uix.scrollview
 
 
 #self.height*0.1
@@ -44,7 +44,7 @@
 	BoxLayout:
 		canvas:
 			Color:
-				rgb: 0, 0.3, 0.3
+				rgb:0.859,0.357,0.259
 			Line:
 				points: self.width*0.12,self.height*0.42,self.width*0.88,self.height*0.42
 				width: self.height*0.003
@@ -118,7 +118,7 @@
 			ToggleButton:
 				text:'New'
 				group:'space'
-				background_normal: 'atlas://images/1/myatlas/button'
+#				background_normal: 'atlas://images/1/myatlas/button'
 				id:'new_space'
 #				background_normal:'adddd.png'
 #				background_down:'add_down.png'
@@ -136,7 +136,7 @@
 		orientation: 'vertical'
 		canvas:
 			Color:
-				rgb: 0, 0.3, 0.3
+				rgb:0.859,0.357,0.259
 			Rectangle:
 				pos: 0, self.height*0.9
 				size: self.width,self.height*0.1
@@ -150,6 +150,7 @@
 			Label:
 				text: 'Мой холодильник'
 				size_hint:.6,.5
+				bold:True
 			Image:
 				source:'1.png'
 				size_hint:.2,.5
@@ -175,7 +176,7 @@
 		orientation: 'vertical'
 		canvas:
 			Color:
-				rgb: 0, 0.3, 0.3
+				rgb:0.859,0.357,0.259
 			Rectangle:
 				pos: 0, self.height*0.9
 				size: self.width,self.height*0.1
@@ -189,6 +190,7 @@
 			Label:
 				text: 'Мои задания'
 				size_hint:.6,.5
+				bold:True
 			Image:
 				source:'1.png'
 				size_hint:.2,.5
@@ -205,7 +207,7 @@
 		orientation: 'vertical'
 		canvas:
 			Color:
-				rgb: 0, 0.3, 0.3
+				rgb:0.859,0.357,0.259
 			Rectangle:
 				pos: 0, self.height*0.9
 				size: self.width,self.height*0.1
@@ -217,8 +219,10 @@
 				on_release:root.manager.current = 'menu'
 				size_hint:.2,.5
 			Label:
-				text: 'Редактирование задания'
+				text: 'Изменить задание'
 				size_hint:.6,.5
+				bold:True
+				id:title
 			Image:
 				source:'1.png'
 				size_hint:.2,.5
@@ -250,7 +254,7 @@
 		orientation: 'vertical'
 		canvas:
 			Color:
-				rgb: 0, 0.3, 0.3
+				rgb:0.859,0.357,0.259
 			Rectangle:
 				pos: 0, self.height*0.9
 				size: self.width,self.height*0.1
@@ -264,6 +268,7 @@
 			Label:
 				text: 'Мои продукты'
 				size_hint:.6,.5
+				bold:True
 			Image:
 				source:'1.png'
 				size_hint:.2,.5
@@ -273,13 +278,31 @@
 			orientation: 'vertical'
 			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
 			spacing: self.height*0.02
+			StackLayout:
+				size_hint:1,.1
+				orientation: 'lr-tb'
+				spacing:self.width*0.01
+				ToggleButton:
+					size_hint:.24,1
+					group:'sort'
+				ToggleButton:
+					size_hint:.24,1
+					group:'sort'
+				ToggleButton:
+					size_hint:.24,1
+					group:'sort'
+				ToggleButton:
+					size_hint:.24,1
+					group:'sort'
+			ScrollView:
+				id:products_view
 			
 <ProductsInfScreen>:
     BoxLayout:
 		orientation: 'vertical'
 		canvas:
 			Color:
-				rgb: 0, 0.3, 0.3
+				rgb:0.859,0.357,0.259
 			Rectangle:
 				pos: 0, self.height*0.9
 				size: self.width,self.height*0.1
@@ -291,8 +314,80 @@
 				on_release:root.manager.current = 'menu'
 				size_hint:.2,.5
 			Label:
-				text: 'Информация о продукте'
+				text: 'Информация'
 				size_hint:.6,.5
+				bold:True
+			Image:
+				source:'1.png'
+				size_hint:.2,.5
+				allow_stretch:True
+		BoxLayout:
+			size_hint:1,.5
+			orientation: 'horizontal'
+			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+			spacing: self.height*0.02
+			BoxLayout:
+				size_hint:1,.8
+				orientation: 'vertical'
+				padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+				spacing: self.height*0.02
+				id:left_colunm
+			BoxLayout:
+				size_hint:1,.8
+				orientation: 'vertical'
+				padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+				spacing: self.height*0.02
+				id:right_column
+		BoxLayout:
+			size_hint:1,.3
+			orientation: 'vertical'
+			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+			spacing: self.height*0.02
+			Label:
+				text:'Описание товара'
+				halign:'left'
+				text_size:self.width,None
+				bold:True
+			Label:
+				text:'Производитель ОАО'
+				id:description
+				halign:'left'
+				text_size:self.width,None
+			Label:
+				text:'Заметки'
+				halign:'left'
+				text_size:self.width,None
+				bold:True
+			TextInput:
+				hint_text:'Yours comments about this product'
+				id:comments
+
+<SettingsScreen>:
+	BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgb:0.859,0.357,0.259
+			Rectangle:
+				pos: 0, self.height*0.9
+				size: self.width,self.height*0.1
+			Line:
+				points: self.width*0.03,self.height*0.75,self.width*0.97,self.height*0.75
+				width: self.height*0.003
+			Line:
+				points: self.width*0.03,self.height*0.39,self.width*0.97,self.height*0.39
+				width: self.height*0.003
+		StackLayout:
+			size_hint:1,.2
+			orientation: 'tb-lr'
+			spacing:self.width*0.02
+			Button:
+				on_release:root.manager.current = 'menu'
+				size_hint:.2,.5
+			Label:
+				text: 'Настройки'
+				size_hint:.6,.5
+				bold:True
 			Image:
 				source:'1.png'
 				size_hint:.2,.5
@@ -300,23 +395,101 @@
 		BoxLayout:
 			size_hint:1,.8
 			orientation: 'vertical'
-			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+			padding: self.width*0.05,-self.height*0.12,self.width*0.05,self.height*0.01
 			spacing: self.height*0.02
+			Label:
+				size_hint_y:.06
+				halign:'left'
+				text_size:self.width,None
+				bold:True
+				text:'Учетные записи'
+			Spinner:
+				size_hint_y:.06
+				id:record_spin
+			Label:
+				size_hint_y:.06
+				bold:True
+				text:'Совместные пользователи'
+				halign:'left'
+				text_size:self.width,None
+			GridLayout:
+				size_hint_y:.3
+				cols:2
+				id:users_grid
+			Label:
+				size_hint_y:.06
+				bold:True
+				text:'Параметры рассылки смс'
+				halign:'left'
+				text_size:self.width,None
+			GridLayout:
+				size_hint_y:.06
+				cols:2
+				Label:
+					text:'Регулярная рассылка'
+					halign:'left'
+					text_size:self.width,None
+				Switch:
+					size_hint_x:.6
+					id:switch_sms
+					active:True
 
-<SettingsScreen>:
-    BoxLayout:
-        Button:
-            text: 'Настройки'
-        Button:
-            text: 'Back to menu'
-            on_release: root.manager.current = 'menu'
-			
+			GridLayout:
+				size_hint_y:.06
+				cols:7
+				ToggleButton:
+					text:'ПН'
+				ToggleButton:
+					text:'ВТ'
+				ToggleButton:
+					text:'СР'
+				ToggleButton:
+					text:'ЧТ'
+				ToggleButton:
+					text:'ПТ'
+				ToggleButton:
+					text:'СБ'
+				ToggleButton:
+					text:'ВС'
+			GridLayout:
+				size_hint_y:.1
+				cols:2
+				Slider:
+					size_hint_x: 4
+					padding:20
+					id:hour_slider
+					max:23
+					value:12
+#					on_value:hour_text.text=str(int(self.value))
+				
+				TextInput:
+					text:str(int(hour_slider.value))
+					id:hour_text
+#					on_text:hour_slider.value=float(int(self.text))
+				Slider:
+					size_hint_x: 4
+					padding:20
+					id:minute_slider
+					max:59
+					value:0
+					step:10
+				
+				TextInput:
+					id:minute_text
+					text:str(int(minute_slider.value))
+#					on_text:minute_slider.value=float(int(self.text))
+					
+			Button:
+				size_hint_y:.06
+				text:'Сохранить'
+				on_release:root.save_settings()
+				
 <StatisticsScreen>:
     BoxLayout:
 		orientation: 'vertical'
 		canvas:
 			Color:
-				rgb: 0, 0.3, 0.3
+				rgb:0.859,0.357,0.259
 			Rectangle:
 				pos: 0, self.height*0.9
 				size: self.width,self.height*0.1
@@ -330,6 +503,7 @@
 			Label:
 				text: 'Статистика'
 				size_hint:.6,.5
+				bold:True
 			Image:
 				source:'1.png'
 				size_hint:.2,.5
@@ -339,13 +513,41 @@
 			orientation: 'vertical'
 			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
 			spacing: self.height*0.02
-			
+			GridLayout:
+				cols:2
+				Label:
+					text:'Выбрать'
+					halign:'left'
+					text_size:self.width,None
+				Spinner:
+					id:spin_products
+				Label:
+					text:'за период'
+					halign:'left'
+					text_size:self.width,None
+				Spinner:
+					id:spin_period
+				Label:
+					text:'по параметру'
+					halign:'left'
+					text_size:self.width,None
+				Spinner:
+					id:spin_param
+			Image:
+				size_hint:1,3
+				id:image
+			Label:
+				id:summary
+			Button:
+				text:'Показать статистику'
+				on_release:root.show_stat()
+	
 <AboutScreen>:
     BoxLayout:
 		orientation: 'vertical'
 		canvas:
 			Color:
-				rgb: 0, 0.3, 0.3
+				rgb:0.859,0.357,0.259
 			Rectangle:
 				pos: 0, self.height*0.9
 				size: self.width,self.height*0.1
@@ -359,6 +561,7 @@
 			Label:
 				text: 'О программе'
 				size_hint:.6,.5
+				bold:True
 			Image:
 				source:'1.png'
 				size_hint:.2,.5
@@ -417,4 +620,4 @@
 		Button:
             text: 'Выйти'
 			size_hint: .7,.1
-			on_release: root.on_exit()	        
+			on_release: root.on_exit()	  

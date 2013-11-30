@@ -3,7 +3,7 @@ import kivy
 
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
-#from kivy.uix.scrollview import ScrollView
+
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.label import Label
@@ -15,9 +15,12 @@ from kivy.uix.button import Button
 from kivy.graphics import Canvas
 from kivy.config import Config
 from kivy.uix.popup import Popup
+from kivy.uix.slider import Slider
+#from kivy.uix.spinner import Spinner
 from kivy.properties import StringProperty, ObjectProperty
 from kivy.uix.carousel import Carousel
 from kivy.animation import Animation
+
 
 from kivy.uix.screenmanager import SlideTransition,SwapTransition,WipeTransition,FadeTransition
 #from kivy.graphics import graphics
@@ -27,6 +30,9 @@ Config.set('graphics', 'width', '280')
 Config.set('graphics', 'height', '500')
 
 Builder.load_file('dip.kv')
+
+global temp
+temp=0
 
 # Declare screens
 class MyScreen(Screen):
@@ -72,18 +78,18 @@ class TasksScreen(MyScreen):
 class TaskEditScreen(MyScreen):
 	
 	def on_pre_enter(self):
-		portfolio=[]
+		person=[]
 		self.ids.grid.clear_widgets()
 		for line in open('1.txt'):
 			fields=line.split(',')
 			name=fields[0]
 			stock=(name)
-			portfolio.append(stock)
+			person.append(stock)
 		self.ids.grid.add_widget(Label())
 		self.ids.grid.add_widget(Image(source='1.png',allow_stretch=True))
 		self.ids.grid.add_widget(Label())
 		self.ids.grid.add_widget(Image(source='1.png',allow_stretch=True))
-		for name in portfolio:
+		for name in person:
 			self.ids.grid.add_widget(Label(text=str(name),halign='left',size_hint=(3,1)))
 			self.ids.grid.add_widget(CheckBox(id=name+'space'))
 			self.ids.grid.add_widget(Label())
@@ -97,15 +103,45 @@ class ProductsScreen(MyScreen):
 class ProductsInfScreen(MyScreen):
     pass
 class SettingsScreen(MyScreen):
-    pass
+	def on_pre_enter(self):
+		person=[]
+		self.ids.users_grid.clear_widgets()
+		for line in open('1.txt'):
+			fields=line.split(',')
+			name=fields[0]
+			phone=fields[1]
+			mail=fields[2]
+			stock=(name,phone,mail)
+			person.append(stock)
+		self.ids.record_spin.text=str(person[0][2])
+		self.ids.record_spin.values=(person[0][2],)
+		for name,phone,mail in person[1:]:
+			self.ids.users_grid.add_widget(TextInput(text=str(name),valign='middle',halign='left',size_hint_x=.8))
+			self.ids.users_grid.add_widget(Label(text=str(phone)+'\n'+str(mail),valign='middle',halign='right'))
+	def save_settings(self):
+		self.show_popup('Ok','Настройки успешно сохранены!','Настройки')
+
+	
 class StatisticsScreen(MyScreen):
-    pass
+	def on_pre_enter(self):
+		self.ids.spin_products.text='Все товары'
+		self.ids.spin_products.values=('Все товары', 'Хлебные изделия', 'Молочные продукты', 'Мясо')
+		self.ids.spin_period.text='Месяц'
+		self.ids.spin_period.values=('Год', 'Сезон', 'Месяц', 'Неделя')
+		self.ids.spin_param.text='Количество'
+		self.ids.spin_param.values=('Количество', 'Цена')
+	def show_stat(self):
+		self.ids.image.source='stat.PNG'
+		self.ids.image.allow_stretch=True
+		self.ids.summary.text='За весь период куплено 233 товара'
+		pass
 class MenuScreen(MyScreen):
 
     def on_exit(self):
 		exit()
 class AboutScreen(MyScreen):
     pass
+
 #class MyScreenManager(Carousel, ScreenManager):
 #	pass
 '''	def swipe(self,touch):
@@ -139,7 +175,7 @@ class DipApp(App):
 		sm.add_widget(StatisticsScreen(name='statistics'))
 		sm.add_widget(MenuScreen(name='menu'))
 		sm.add_widget(AboutScreen(name='about'))
-		sm.current = 'login'
+		sm.current = 'settings'
 		return sm
 		
 	
