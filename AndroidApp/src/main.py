@@ -157,6 +157,26 @@ class AboutScreen(MyScreen):
 	def effect_y(touch):
 
 return	
+
+//////////
+в процессе написания
+//////////
+
+class MyView(MyScreen, ScrollView)
+    def scroll_y(self):
+        layout = GridLayout(cols=1, padding=5, spacing=10, size_hint=(None, None), width=300)
+        layout.bind(minimum_height=layout.setter('height'))
+        for i in range(10):
+            MyButton = Button(text='number'str(i), size=(280, 50), size_hint=(None, None))
+            layout.add_widget(MyButton)
+
+        root=ScrollView(size_hint=(None, None), size=(300,300), 
+            pos_hint={'center_x': .5, 'center_y': .5},
+            do_scroll_x=False)
+        root.add_widget(layout)
+
+        return root
+ /////////
 '''
     
 class DipApp(App):
