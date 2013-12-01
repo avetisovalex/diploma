@@ -1,136 +1,144 @@
-﻿#coding=utf-8
-#:kivy 1.0.4
+﻿#:kivy 1.7.2
 #:import os os
-#:import ScrollView kivy.uix.scrollview
-
-
-#self.height*0.1
-#self.width*0.1
+<LLabel>:
+	halign:'left'
+	text_size:self.width,self.height
+<ScrollView>:
+    canvas:
+        Color:
+            rgb: 0, 0, 0
+        Rectangle:
+            pos: self.pos
+            size: self.size
 <LoginScreen>:	
-	BoxLayout:
-		orientation: 'vertical'
-		padding: self.width*0.15,self.height*0.1,self.width*0.15,self.height*0.1
-		spacing: self.height*0.02
-		Image:
-			size_hint:1,7
-			source:'1.png'
-			allow_stretch:True
-		TextInput:
-			hint_text: 'user name'
-			id:'user name'
-			multiline: False
-		TextInput:
-			hint_text:'password'
-			id:'password'
-			multiline: False
-			password:True
+	ScrollView:
+		do_scroll_x:False
 		BoxLayout:
-			orientation: 'horizontal'
-			CheckBox:
-				id:'check'
-			Label:
-				size_hint: 6, 1
-			Label:
-				size_hint: 4, 1
-				text: 'Запомнить'
-	    Button:
-			text: 'Войти в систему'
-			on_release: root.enter_system()
-        Button:
-            text: 'Зарегистрироваться'
-            on_release: root.reg()
+			size_hint:None,None
+			width:root.width
+			height:root.height
+			orientation: 'vertical'
+			padding: self.width*0.15,self.height*0.1,self.width*0.15,self.height*0.1
+			spacing: self.height*0.02
+			Image:
+				size_hint:1,7
+				source:'1.png'
+				allow_stretch:True
+			TextInput:
+				hint_text: 'user name'
+				id:'user name'
+				multiline: False
+			TextInput:
+				hint_text:'password'
+				id:'password'
+				multiline: False
+				password:True
+			BoxLayout:
+				orientation: 'horizontal'
+				CheckBox:
+					id:'check'
+				Label:
+					size_hint: 6, 1
+				Label:
+					size_hint: 4, 1
+					text: 'Запомнить'
+			Button:
+				text: 'Войти в систему'
+				on_release: root.enter_system()
+			Button:
+				text: 'Зарегистрироваться'
+				on_release: root.reg()
 			
 <AuthorizationScreen>:
-	BoxLayout:
-		canvas:
-			Color:
-				rgb:0.859,0.357,0.259
-			Line:
-				points: self.width*0.12,self.height*0.42,self.width*0.88,self.height*0.42
-				width: self.height*0.003
-				
-		orientation: 'vertical'
-		padding: self.width*0.15,self.height*0.03,self.width*0.15,self.height*0.03
-		spacing: self.height*0.02
-		Label:
-			halign: 'center'
-			text: 'Пожалуйста, введите информацию\nо вашей учетной записи'
-		TextInput:
-			hint_text: 'user name*'
-			id:'name'
-			readonly: False
-			multiline: False
-		TextInput:
-			hint_text:'e-mail*'
-			id:'e-mail'
-			multiline: False
-		TextInput:
-			hint_text:'password*'
-			id:'password'
-			multiline: False
-		TextInput:
-			hint_text:'re-enter password*'
-			id:'re_password'
-			multiline: False
-		TextInput:
-			hint_text:'+7 911 111-11-11'
-			id:'phone'
-			multiline: False
+	ScrollView:
+		do_scroll_x:False
 		BoxLayout:
-			orientation: 'horizontal'
-			spacing:self.width*0.12
-			Button:
-				text:'Смс-код'
-				size_hint: 5, 1
-				on_release: root.code_sms()
+			size_hint:None,None
+			width:root.width
+			height:root.height*1.1
+			orientation: 'vertical'
+			padding: self.width*0.15,self.height*0.03,self.width*0.15,self.height*0.03
+			spacing: self.height*0.02
+#			canvas:
+#				Color:
+#					rgb:0.859,0.357,0.259
+#				Line:
+#					points: root.width*0.12,root.height*0.42,root.width*0.88,root.height*0.42
+#					width: root.height*0.003
+			Label:
+				halign: 'center'
+				text: 'Пожалуйста, введите информацию\nо вашей учетной записи'
 			TextInput:
-				hint_text:'1111'
-				id:'code'
-				size_hint: 3, 1
-			CheckBox:
-				id:'code_check'
-		Label:
-			halign: 'center'
-			text: 'Пожалуйста, введите данные\nобщего пространства'
-		TextInput:
-			hint_text: 'name'
-			id:'space_name'
-			multiline: False
-		TextInput:
-			hint_text:'password'
-			id:'space_password'
-			multiline:False
-			password:True
-#		GridLayout:
-#			cols:2
-#			CheckBox:
-#				group:'space'
-#			Label:
-#				size_hint_x:5
-#				text:'Новое пространство'
-#			CheckBox:
-#				group:'space'
-#			Label:
-#				text:'Присоединиться'
-		BoxLayout:
-			orientation: 'horizontal'
-			spacing:self.width*0.12
-			ToggleButton:
-				text:'New'
-				group:'space'
+				hint_text: 'user name*'
+				id:'name'
+				readonly: False
+				multiline: False
+			TextInput:
+				hint_text:'e-mail*'
+				id:'e-mail'
+				multiline: False
+			TextInput:
+				hint_text:'password*'
+				id:'password'
+				multiline: False
+			TextInput:
+				hint_text:'re-enter password*'
+				id:'re_password'
+				multiline: False
+			TextInput:
+				hint_text:'+7 911 111-11-11'
+				input_type:'number'
+				id:'phone'
+				multiline: False
+			BoxLayout:
+				orientation: 'horizontal'
+				spacing:self.width*0.12
+				Button:
+					text:'Смс-код'
+					size_hint: 5, 1
+					on_release: root.code_sms()
+				TextInput:
+					hint_text:'1111'
+					input_type:'number'
+					id:'code'
+					size_hint: 3, 1
+				CheckBox:
+					id:'code_check'
+			Label:
+				halign: 'center'
+				text: 'Пожалуйста, введите данные\nобщего пространства'
+			BoxLayout:
+				orientation: 'horizontal'
+				spacing:self.width*0.12
+				ToggleButton:
+					text:'New'
+					group:'space'
+					id:'new_space'
 #				background_normal: 'atlas://images/1/myatlas/button'
-				id:'new_space'
 #				background_normal:'adddd.png'
 #				background_down:'add_down.png'
-			Label:
-				size_hint: 2, 1
-			ToggleButton:
-				text:'Old'
-				group:'space'
-				id:'cur_space'
-		Button:
-            text: 'Зарегистрироваться'
-			on_release: root.register()
+#				Image:
+#					source: 'add.png'
+#					pos: self.pos
+#					size: 10,10
+				Label:
+					size_hint: 2, 1
+				ToggleButton:
+					text:'Old'
+					group:'space'
+					id:'cur_space'
+			TextInput:
+				hint_text: 'name'
+				id:'space_name'
+				multiline: False
+			TextInput:
+				hint_text:'password'
+				id:'space_password'
+				multiline:False
+				password:True
+			Button:
+				text: 'Зарегистрироваться'
+				on_release: root.register()
 <MainScreen>:
 	BoxLayout:
 		orientation: 'vertical'
@@ -141,36 +149,60 @@
 				pos: 0, self.height*0.9
 				size: self.width,self.height*0.1
 		StackLayout:
-			size_hint:1,.2
+			size_hint:1,.1
 			orientation: 'tb-lr'
 			spacing:self.width*0.02
 			Button:
 				on_release:root.manager.current = 'menu'
-				size_hint:.2,.5
+				size_hint:.2,1
 			Label:
 				text: 'Мой холодильник'
-				size_hint:.6,.5
+				size_hint:.6,1
 				bold:True
 			Image:
 				source:'1.png'
-				size_hint:.2,.5
+				size_hint:.2,1
 				allow_stretch:True
 		BoxLayout:
-			size_hint:1,.8
+			size_hint:1,.9
 			orientation: 'vertical'
-			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+			padding: self.width*0.1,self.height*0.05,self.width*0.1,self.height*0.05
 			spacing: self.height*0.02
-			Label:
+			LLabel:
 				text:'Текущие задания'
+				size_hint:1,.5
+				bold:True
+				valign:'top'
 			ScrollView:
+				scroll_distance:15
 				size_hint:1,4
-            Label:
+				do_scroll_y:False
+				BoxLayout:
+					size_hint:None,None
+					width:root.width*2.4
+					height:root.height*0.25
+					orientation:'horizontal'
+					id:tasks_box
+					
+			LLabel:
 				text:'Продукты в холодильнике'
+				bold:True
+				valign:'top'
 			Spinner:
+				size_hint_y:1
+				id:spin_products
 				
 			ScrollView:
-				size_hint:1,4
-            
+				scroll_distance:15
+				size_hint_y:4
+				do_scroll_x:False
+				BoxLayout:
+					size_hint:None,None
+					width:root.width*0.8
+					height:root.height*0.5
+					orientation:'vertical'
+					id:products
+          
 <TasksScreen>:
     BoxLayout:
 		orientation: 'vertical'
@@ -181,29 +213,36 @@
 				pos: 0, self.height*0.9
 				size: self.width,self.height*0.1
 		StackLayout:
-			size_hint:1,.2
+			size_hint:1,.1
 			orientation: 'tb-lr'
 			spacing:self.width*0.02
 			Button:
 				on_release:root.manager.current = 'menu'
-				size_hint:.2,.5
+				size_hint:.2,1
 			Label:
 				text: 'Мои задания'
-				size_hint:.6,.5
+				size_hint:.6,1
 				bold:True
 			Image:
 				source:'1.png'
-				size_hint:.2,.5
+				size_hint:.2,1
 				allow_stretch:True
 		BoxLayout:
-			size_hint:1,.8
+			size_hint:1,.9
 			orientation: 'vertical'
-			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+			padding: self.width*0.1,self.height*0.02,self.width*0.1,self.height*0.05
 			spacing: self.height*0.02
 			ScrollView:
-			
+				do_scroll_x:False
+				BoxLayout:
+					size_hint:None,None
+					width:root.width*0.8
+					height:root.height*1.1
+					orientation:'vertical'
+					id:task_box
+								
 <TaskEditScreen>:
-    BoxLayout:
+	BoxLayout:
 		orientation: 'vertical'
 		canvas:
 			Color:
@@ -212,31 +251,37 @@
 				pos: 0, self.height*0.9
 				size: self.width,self.height*0.1
 		StackLayout:
-			size_hint:1,.2
+			size_hint:1,.1
 			orientation: 'tb-lr'
 			spacing:self.width*0.02
 			Button:
 				on_release:root.manager.current = 'menu'
-				size_hint:.2,.5
+				size_hint:.2,1
 			Label:
 				text: 'Изменить задание'
-				size_hint:.6,.5
+				size_hint:.6,1
 				bold:True
 				id:title
 			Image:
 				source:'1.png'
-				size_hint:.2,.5
+				size_hint:.2,1
 				allow_stretch:True
 		BoxLayout:
-			size_hint:1,.8
+			size_hint:1,.9
 			orientation: 'vertical'
-			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+			padding: self.width*0.15,self.height*0.01,self.width*0.15,self.height*0.02
 			spacing: self.height*0.02
 			TextInput:
 				hint_text:'Title'
 				size_hint:1,.3
 			ScrollView:
-				size_hint:4,1
+				do_scroll_x:False
+				BoxLayout:
+					size_hint:None,None
+					width:root.width*0.7
+					height:root.height*0.5
+					orientation:'vertical'
+					id:product_box
 			Label:
 				halign:'center'
 				text:'Выберите пользователей, которым\nбудет доступно задание и смс'
@@ -259,43 +304,54 @@
 				pos: 0, self.height*0.9
 				size: self.width,self.height*0.1
 		StackLayout:
-			size_hint:1,.2
+			size_hint:1,.1
 			orientation: 'tb-lr'
 			spacing:self.width*0.02
 			Button:
 				on_release:root.manager.current = 'menu'
-				size_hint:.2,.5
+				size_hint:.2,1
 			Label:
 				text: 'Мои продукты'
-				size_hint:.6,.5
+				size_hint:.6,1
 				bold:True
 			Image:
 				source:'1.png'
-				size_hint:.2,.5
+				size_hint:.2,1
 				allow_stretch:True
 		BoxLayout:
-			size_hint:1,.8
+			size_hint:1,.9
 			orientation: 'vertical'
-			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+			padding: self.width*0.1,self.height*0.01,self.width*0.1,self.height*0.1
 			spacing: self.height*0.02
 			StackLayout:
 				size_hint:1,.1
 				orientation: 'lr-tb'
 				spacing:self.width*0.01
 				ToggleButton:
+					text:'Избр.'
 					size_hint:.24,1
 					group:'sort'
 				ToggleButton:
+					text:'А-Я'
 					size_hint:.24,1
 					group:'sort'
 				ToggleButton:
+					text:'Срок'
 					size_hint:.24,1
 					group:'sort'
 				ToggleButton:
+					text:'Группа'
 					size_hint:.24,1
 					group:'sort'
 			ScrollView:
-				id:products_view
+				do_scroll_x:False
+				GridLayout:
+					size_hint:None,None
+					width:root.width*0.8
+					height:root.height
+					cols:3
+					id:grid_products
+
 			
 <ProductsInfScreen>:
     BoxLayout:
@@ -307,58 +363,104 @@
 				pos: 0, self.height*0.9
 				size: self.width,self.height*0.1
 		StackLayout:
-			size_hint:1,.2
+			size_hint:1,.1
 			orientation: 'tb-lr'
 			spacing:self.width*0.02
 			Button:
 				on_release:root.manager.current = 'menu'
-				size_hint:.2,.5
+				size_hint:.2,1
 			Label:
 				text: 'Информация'
-				size_hint:.6,.5
+				size_hint:.6,1
 				bold:True
 			Image:
 				source:'1.png'
-				size_hint:.2,.5
+				size_hint:.2,1
 				allow_stretch:True
+		Label:
+			size_hint:1,.07
+			bold:True
+			id:name
 		BoxLayout:
-			size_hint:1,.5
+			size_hint:1,.38
 			orientation: 'horizontal'
-			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+			padding: self.width*0.03,self.height*0.01,self.width*0.03,self.height*0.02
 			spacing: self.height*0.02
 			BoxLayout:
-				size_hint:1,.8
+				size_hint:.3,1
 				orientation: 'vertical'
-				padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
 				spacing: self.height*0.02
-				id:left_colunm
-			BoxLayout:
-				size_hint:1,.8
-				orientation: 'vertical'
-				padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+				Image:
+					size_hint:1,4
+					id:image
+					allow_stretch:True
+				Button:
+					text:'В задание'
+					on_release:root.in_task()
+				Button:
+					text:'Штрих-код'
+					on_release:root.code()
+				Label:
+					size_hint:1,5
+
+			GridLayout:
+				size_hint:.6,1
 				spacing: self.height*0.02
-				id:right_column
+				cols:2
+				LLabel:
+					text:'Категория'
+				LLabel:
+					id:cat
+				LLabel:
+					text:'Куплено'
+				LLabel:
+					id:bought
+				LLabel:
+					text:'Произведено'
+				LLabel:
+					id:made
+				LLabel:
+					text:'Срок'
+				LLabel:
+					id:term
+				LLabel:
+					text:'Годен до'
+				LLabel:
+					id:before
+				LLabel:
+					text:'Ккалории'
+				LLabel:
+					id:ccal
+				LLabel:
+					text:'Цена,руб'
+				LLabel:
+					id:price
 		BoxLayout:
-			size_hint:1,.3
+			size_hint:1,.45
 			orientation: 'vertical'
-			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
-			spacing: self.height*0.02
-			Label:
+			padding: self.width*0.03,0,self.width*0.03,self.height*0.03
+			spacing: self.height*0.01
+			LLabel:
 				text:'Описание товара'
-				halign:'left'
-				text_size:self.width,None
 				bold:True
-			Label:
-				text:'Производитель ОАО'
-				id:description
-				halign:'left'
-				text_size:self.width,None
-			Label:
+				size_hint:1,.1
+			ScrollView:
+				size_hint:1,.5
+				do_scroll_x:False
+				BoxLayout:
+					size_hint:None, None
+					orientation: 'vertical'
+					width:root.width*0.9
+					height:root.height*0.5
+					LLabel:
+						id:description
+						valign:'top'
+			LLabel:
 				text:'Заметки'
-				halign:'left'
-				text_size:self.width,None
 				bold:True
+				size_hint:1,.1
 			TextInput:
+				size_hint:1,.3
 				hint_text:'Yours comments about this product'
 				id:comments
 
@@ -378,111 +480,105 @@
 				points: self.width*0.03,self.height*0.39,self.width*0.97,self.height*0.39
 				width: self.height*0.003
 		StackLayout:
-			size_hint:1,.2
+			size_hint:1,.1
 			orientation: 'tb-lr'
 			spacing:self.width*0.02
 			Button:
 				on_release:root.manager.current = 'menu'
-				size_hint:.2,.5
+				size_hint:.2,1
 			Label:
 				text: 'Настройки'
-				size_hint:.6,.5
+				size_hint:.6,1
 				bold:True
 			Image:
 				source:'1.png'
-				size_hint:.2,.5
+				size_hint:.2,1
 				allow_stretch:True
-		BoxLayout:
-			size_hint:1,.8
-			orientation: 'vertical'
-			padding: self.width*0.05,-self.height*0.12,self.width*0.05,self.height*0.01
-			spacing: self.height*0.02
-			Label:
-				size_hint_y:.06
-				halign:'left'
-				text_size:self.width,None
-				bold:True
-				text:'Учетные записи'
-			Spinner:
-				size_hint_y:.06
-				id:record_spin
-			Label:
-				size_hint_y:.06
-				bold:True
-				text:'Совместные пользователи'
-				halign:'left'
-				text_size:self.width,None
-			GridLayout:
-				size_hint_y:.3
-				cols:2
-				id:users_grid
-			Label:
-				size_hint_y:.06
-				bold:True
-				text:'Параметры рассылки смс'
-				halign:'left'
-				text_size:self.width,None
-			GridLayout:
-				size_hint_y:.06
-				cols:2
-				Label:
-					text:'Регулярная рассылка'
-					halign:'left'
-					text_size:self.width,None
-				Switch:
-					size_hint_x:.6
-					id:switch_sms
-					active:True
-
-			GridLayout:
-				size_hint_y:.06
-				cols:7
-				ToggleButton:
-					text:'ПН'
-				ToggleButton:
-					text:'ВТ'
-				ToggleButton:
-					text:'СР'
-				ToggleButton:
-					text:'ЧТ'
-				ToggleButton:
-					text:'ПТ'
-				ToggleButton:
-					text:'СБ'
-				ToggleButton:
-					text:'ВС'
-			GridLayout:
-				size_hint_y:.1
-				cols:2
-				Slider:
-					size_hint_x: 4
-					padding:20
-					id:hour_slider
-					max:23
-					value:12
-#					on_value:hour_text.text=str(int(self.value))
-				
-				TextInput:
-					text:str(int(hour_slider.value))
-					id:hour_text
-#					on_text:hour_slider.value=float(int(self.text))
-				Slider:
-					size_hint_x: 4
-					padding:20
-					id:minute_slider
-					max:59
-					value:0
-					step:10
-				
-				TextInput:
-					id:minute_text
-					text:str(int(minute_slider.value))
-#					on_text:minute_slider.value=float(int(self.text))
-					
-			Button:
-				size_hint_y:.06
-				text:'Сохранить'
-				on_release:root.save_settings()
+		ScrollView:
+			size_hint:1,.9
+			do_scroll_x:False
+			BoxLayout:
+				size_hint:None, None
+				orientation: 'vertical'
+				padding: root.width*0.05,0,-root.width*0.05,root.height*0.01
+				spacing: root.height*0.02
+				width:root.width*0.9
+				height:root.height
+				LLabel:
+					size_hint_y:.06
+					bold:True
+					text:'Учетные записи'
+				Spinner:
+					size_hint_y:.06
+					id:record_spin
+				LLabel:
+					size_hint_y:.06
+					bold:True
+					text:'Совместные пользователи'
+				GridLayout:
+					size_hint_y:.3
+					cols:2
+					id:users_grid
+				LLabel:
+					size_hint_y:.06
+					bold:True
+					text:'Параметры рассылки смс'
+				GridLayout:
+					size_hint_y:.06
+					cols:2
+					LLabel:
+						text:'Регулярная рассылка'
+					Switch:
+						size_hint_x:.6
+						id:switch_sms
+						active:True
+				GridLayout:
+					size_hint_y:.08
+					cols:7
+					ToggleButton:
+						text:'ПН'
+					ToggleButton:
+						text:'ВТ'
+					ToggleButton:
+						text:'СР'
+					ToggleButton:
+						text:'ЧТ'
+					ToggleButton:
+						text:'ПТ'
+					ToggleButton:
+						text:'СБ'
+					ToggleButton:
+						text:'ВС'
+				GridLayout:
+					size_hint_y:.2
+					cols:2
+					Slider:
+						size_hint_x: 4
+						padding:40
+						id:hour_slider
+						max:23
+						value:23 if (int(hour_text.text)>23) else float(int(hour_text.text))
+					TextInput:
+						text:str(int(hour_slider.value))
+						multiline:False
+						id:hour_text
+						input_type:'number'
+					Slider:
+						size_hint_x: 4
+						padding:40
+						id:minute_slider
+						max:59
+						value:59 if (int(minute_text.text)>59) else float(int(minute_text.text))
+						step:10
+					TextInput:
+						multiline:False
+						input_type:'number'
+						id:minute_text
+						text:str(int(minute_slider.value))
+				Button:
+					size_hint_y:.06
+					text:'Сохранить'
+					on_release:root.save_settings()
 				
 <StatisticsScreen>:
     BoxLayout:
@@ -494,51 +590,47 @@
 				pos: 0, self.height*0.9
 				size: self.width,self.height*0.1
 		StackLayout:
-			size_hint:1,.2
+			size_hint:1,.1
 			orientation: 'tb-lr'
 			spacing:self.width*0.02
 			Button:
 				on_release:root.manager.current = 'menu'
-				size_hint:.2,.5
+				size_hint:.2,1
 			Label:
 				text: 'Статистика'
-				size_hint:.6,.5
+				size_hint:.6,1
 				bold:True
 			Image:
 				source:'1.png'
-				size_hint:.2,.5
+				size_hint:.2,1
 				allow_stretch:True
 		BoxLayout:
-			size_hint:1,.8
+			size_hint:1,.9
 			orientation: 'vertical'
-			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
+			padding: self.width*0.06,self.height*0.05,self.width*0.06,self.height*0.1
 			spacing: self.height*0.02
 			GridLayout:
+				size_hint:1,2
 				cols:2
-				Label:
+				LLabel:
 					text:'Выбрать'
-					halign:'left'
-					text_size:self.width,None
 				Spinner:
 					id:spin_products
-				Label:
+				LLabel:
 					text:'за период'
-					halign:'left'
-					text_size:self.width,None
 				Spinner:
 					id:spin_period
-				Label:
+				LLabel:
 					text:'по параметру'
-					halign:'left'
-					text_size:self.width,None
 				Spinner:
 					id:spin_param
 			Image:
-				size_hint:1,3
+				size_hint:1,4
 				id:image
 			Label:
 				id:summary
 			Button:
+				size_hint:1,.7
 				text:'Показать статистику'
 				on_release:root.show_stat()
 	
@@ -552,30 +644,28 @@
 				pos: 0, self.height*0.9
 				size: self.width,self.height*0.1
 		StackLayout:
-			size_hint:1,.2
+			size_hint:1,.1
 			orientation: 'tb-lr'
 			spacing:self.width*0.02
 			Button:
 				on_release:root.manager.current = 'menu'
-				size_hint:.2,.5
+				size_hint:.2,1
 			Label:
 				text: 'О программе'
-				size_hint:.6,.5
+				size_hint:.6,1
 				bold:True
 			Image:
 				source:'1.png'
-				size_hint:.2,.5
+				size_hint:.2,1
 				allow_stretch:True
-		FloatLayout:
-			size_hint:1,.8
-#			orientation: 'vertical'
-#			padding: self.width*0.15,-self.height*0.1,self.width*0.15,self.height*0.1
-#			spacing: self.height*0.02	
-			Label:
-				pos: 0,self.height*0.5
-#				size: .7,.7
+		BoxLayout:
+			size_hint:1,.9
+			orientation: 'vertical'
+			padding: self.width*0.1,self.height*0.02,self.width*0.1,self.height*0.1
+			spacing: self.height*0.1	
+			LLabel:
 				valign:'top'
-				text:'Это приложение поможет Вам\nудобно и эффективно управлять\nсодержимым своего холодильника'
+				text:'Это приложение поможет Вам удобно и эффективно управлять содержимым своего холодильника'
 <MenuScreen>:
 	StackLayout:
 	    orientation:'lr-tb'
@@ -586,8 +676,8 @@
 			Rectangle:
 				pos: self.pos
 				size: self.size
-		Button:
-            text: 'User'
+		Label:
+            text: 'Alex'
 			size_hint: .5,.1
 		Button:
             text: 'Настр.'
@@ -607,8 +697,12 @@
 			on_release: root.manager.current = 'task_edit'
 		Button:
             text: 'Продукты'
-			size_hint: .7,.1
+			size_hint: .5,.1
 			on_release: root.manager.current = 'products'
+		Button:
+            text: 'Доб.'
+			size_hint: .2,.1
+			on_release: root.manager.current = 'products_inf'
 		Button:
             text: 'Статистика'
 			size_hint: .7,.1
