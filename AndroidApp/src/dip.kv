@@ -26,11 +26,11 @@
 				allow_stretch:True
 			TextInput:
 				hint_text: 'user name'
-				id:'user name'
+				id:user_name
 				multiline: False
 			TextInput:
 				hint_text:'password'
-				id:'password'
+				id:password
 				multiline: False
 				password:True
 			BoxLayout:
@@ -70,25 +70,25 @@
 				text: 'Пожалуйста, введите информацию\nо вашей учетной записи'
 			TextInput:
 				hint_text: 'user name*'
-				id:'name'
+				id:name
 				readonly: False
 				multiline: False
 			TextInput:
 				hint_text:'e-mail*'
-				id:'e-mail'
+				id:e_mail
 				multiline: False
 			TextInput:
 				hint_text:'password*'
-				id:'password'
+				id:password
 				multiline: False
 			TextInput:
 				hint_text:'re-enter password*'
-				id:'re_password'
+				id:re_password
 				multiline: False
 			TextInput:
 				hint_text:'+7 911 111-11-11'
 				input_type:'number'
-				id:'phone'
+				id:phone
 				multiline: False
 			BoxLayout:
 				orientation: 'horizontal'
@@ -100,10 +100,10 @@
 				TextInput:
 					hint_text:'1111'
 					input_type:'number'
-					id:'code'
+					id:code
 					size_hint: 3, 1
 				CheckBox:
-					id:'code_check'
+					id:code_check
 			Label:
 				halign: 'center'
 				text: 'Пожалуйста, введите данные\nобщего пространства'
@@ -113,7 +113,7 @@
 				ToggleButton:
 					text:'New'
 					group:'space'
-					id:'new_space'
+					id:new_space
 #				background_normal: 'atlas://images/1/myatlas/button'
 #				background_normal:'adddd.png'
 #				background_down:'add_down.png'
@@ -126,14 +126,14 @@
 				ToggleButton:
 					text:'Old'
 					group:'space'
-					id:'cur_space'
+					id:cur_space
 			TextInput:
 				hint_text: 'name'
-				id:'space_name'
+				id:space_name
 				multiline: False
 			TextInput:
 				hint_text:'password'
-				id:'space_password'
+				id:space_password
 				multiline:False
 				password:True
 			Button:
@@ -295,7 +295,7 @@
 				on_release: root.create_task()
 				
 <ProductsScreen>:
-    BoxLayout:
+	BoxLayout:
 		orientation: 'vertical'
 		canvas:
 			Color:
@@ -391,17 +391,20 @@
 				orientation: 'vertical'
 				spacing: self.height*0.02
 				Image:
-					size_hint:1,4
+					size_hint:1,.4
 					id:image
 					allow_stretch:True
 				Button:
+					size_hint:1,.2
 					text:'В задание'
 					on_release:root.in_task()
 				Button:
+					size_hint:1,.2
 					text:'Штрих-код'
 					on_release:root.code()
 				Label:
-					size_hint:1,5
+					size_hint:1,.2
+
 
 			GridLayout:
 				size_hint:.6,1
@@ -451,7 +454,7 @@
 					size_hint:None, None
 					orientation: 'vertical'
 					width:root.width*0.9
-					height:root.height*0.5
+					height:root.height*0.45
 					LLabel:
 						id:description
 						valign:'top'
@@ -665,7 +668,7 @@
 			spacing: self.height*0.1	
 			LLabel:
 				valign:'top'
-				text:'Это приложение поможет Вам удобно и эффективно управлять содержимым своего холодильника'
+				id:about
 <MenuScreen>:
 	StackLayout:
 	    orientation:'lr-tb'

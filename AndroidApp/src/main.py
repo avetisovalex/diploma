@@ -87,6 +87,8 @@ class MainScreen(MyScreen):
 		self.ids.spin_products.text='Все товары'
 		self.ids.spin_products.values=('Все товары', 'Хлебные изделия', 'Молочные продукты', 'Мясо')
 		task=[]
+		self.ids.tasks_box.clear_widgets()
+		self.ids.products.clear_widgets()
 		for line in open('tasks.txt'):
 			fields=line.split(',')
 			date=fields[0]
@@ -141,6 +143,7 @@ class TasksScreen(MyScreen):
 			
 class TaskEditScreen(MyScreen):
 	def on_pre_enter(self):
+		self.ids.product_box.clear_widgets()
 		task=[]
 		for line in open('tasks.txt'):
 			fields=line.split(',')
@@ -217,6 +220,7 @@ class ProductsInfScreen(MyScreen):
 class SettingsScreen(MyScreen):
 	def on_pre_enter(self):
 		person=[]
+		self.ids.users_grid.clear_widgets()
 		for line in open('users.txt'):
 			fields=line.split(',')
 			name=fields[0]
@@ -251,7 +255,8 @@ class MenuScreen(MyScreen):
     def on_exit(self):
 		exit()
 class AboutScreen(MyScreen):
-    pass
+	def on_pre_enter(self):
+		self.ids.about.text='Это приложение поможет Вам удобно и эффективно управлять содержимым своего холодильника'
 
 #class MyScreenManager(Carousel, ScreenManager):
 #	pass
@@ -286,7 +291,7 @@ class DipApp(App):
 		sm.add_widget(StatisticsScreen(name='statistics'))
 		sm.add_widget(MenuScreen(name='menu'))
 		sm.add_widget(AboutScreen(name='about'))
-		sm.current = 'products_inf'
+		sm.current = 'login'
 		return sm
 		
 	
