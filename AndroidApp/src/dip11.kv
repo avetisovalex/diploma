@@ -1,172 +1,35 @@
-#:kivy 1.7.2
+﻿#:kivy 1.7.2
 #:import os os
-#<Slider>:
-#	canvas:
-#		BorderImage:
-#			source:"txt_input.png"
-#		Rectangle:
-#			source:"txt_input_active.png"
-<CheckBox>:
-    canvas:
-        Color:
-            rgb: 1, 1, 1
-        Rectangle:
-            source: 'mycheckbox%s_%s' % (('_radio' if self.group else ''), ('on.png' if self.active else 'off.png'))
-            size: 20,20
-            pos: int(self.center_x - 10), int(self.center_y - 10)
-
-<MyButton>:
-	background_normal: "btn1.png"
-    background_down: "btn_down1.png" 
-    texture_size: [230,40]
-	font_size: '15sp'
-	font_name: 'Europe Normal.ttf'
-    canvas.before:
-    	BorderImage:
-            border: self.border
-            pos: self.pos
-            size: self.size
-            source: self.background_normal if self.state == 'normal' else self.background_down
-        
-<SpinnerOption>:
-	font_size: '15sp'
-	color:0.176,0.39,0.176,1
-	background_normal: "txt_input.png"
-    background_down: "txt_input_active.png"
-<Spinner>:
-	font_size: '15sp'
-	color:0.176,0.39,0.176,1
-	background_normal: "txt_input.png"
-    background_down: "txt_input_active.png"	
 <LLabel>:
-	font_size: '15sp'
-	font_name: 'Europe Normal.ttf'
 	halign:'left'
 	text_size:self.width,self.height
-<MenuButton>:
-    background_normal: "menu.png"
-    background_down: "menu_down1.png" 
-    texture_size: [54,54]
-	font_size: '15sp'
-    canvas:
-    	BorderImage:
-            border: self.border
-            pos: self.pos
-            size: self.size
-            source: 'menu_icon_back_down.png' if self.state == 'normal' else 'menu_icon_back.png'
-        Rectangle:
-            texture: self.texture
-            size: 53,45
-            pos: self.center_x-27,self.center_y-23
-            source: 'menu_icon_down.png' if self.state == 'normal' else 'menu_icon.png'
-<ListButton>:
-	background_normal: "btn_menu.png"
-	halign:'left'
-    background_down: "btn_down_menu.png"
-    padding:-self.width*0.1,-self.height*0.2 
-    text_size:self.width*0.9,self.height
-    texture_size: [345,81]
-    font_size: '20sp'
-	font_name: 'Europe Normal.ttf'
-	bold:True
-    canvas.before:
-    	BorderImage:
-            border: self.border
-            pos: self.pos
-            size: self.size
-            source: self.background_normal if self.state == 'normal' else self.background_down
-<MyLabel>:
-	markup:True
-	font_size: '15sp'
-	font_name: 'Europe Normal.ttf'
-<UpLabel>:
-	font_size: '30sp'
-	padding:0,-self.height*0.3
-	text_size:self.width,self.height
-	font_name: 'a_AvanteTitulInline.ttf'
-
-<MyTextInput>:
-	font_size: '15sp'
-	font_name: 'Europe Normal.ttf'
-	multiline:False
-	markup:True
-<IconTextInput>:
-	font_size: '15sp'
-	font_name: 'Europe Normal.ttf'
-	multiline:False
-	markup:True
-<MyPopup>:
-
-	size_hint:.9,.3
-	separator_color:0.404,0.674,0.396,1
-
-# MenuPopup widget
-<MenuPopup>:
-	size_hint: .5, .5
-	padding: self.width*0.2,self.height*0.25
-    GridLayout:
-        cols: 1
-        pos: self.pos
-        size: self.size
-        MyButton:
-            text: 'Настр.'
-			id:set_btn
-#			on_release:root.on_btn_settings() 
-		MyButton:
-            text: 'Главная'
-			
-#			on_release: root.manager.current = 'main'
-      
-	
 <ScrollView>:
-	font_size: '15sp'
-    canvas.before:
+    canvas:
         Color:
-            rgb: 1, 1, 1
+            rgb: 0, 0, 0
         Rectangle:
             pos: self.pos
             size: self.size
-<MyBoxLayout>:
-	orientation:'vertical'
-	canvas.before:
-        Color:
-        	rgb: 1, 1, 1
-	    Rectangle:
-	        pos: self.pos
-	        size: self.size
 <LoginScreen>:	
 	ScrollView:
 		do_scroll_x:False
-		MyBoxLayout:
+		BoxLayout:
 			size_hint:None,None
 			width:root.width
 			height:root.height
+			orientation: 'vertical'
 			padding: self.width*0.15,self.height*0.1,self.width*0.15,self.height*0.1
 			spacing: self.height*0.02
 			Image:
-				size_hint:1,6
-				source:'11.png'
+				size_hint:1,7
+				source:'1.png'
 				allow_stretch:True
-			MyTextInput:
-				canvas.after:
-					Rectangle:
-						pos:self.width*0.22,self.height*6.8
-						size: 50,50
-            			source: 'mail_icon.png'
-				padding:self.width*0.2,self.height*0.3
-				text_size:self.width*0.8,self.height
-				hint_text: 'User name'
+			TextInput:
+				hint_text: 'user name'
 				id:user_name
 				multiline: False
-			MyTextInput:
-				canvas.after:
-					Rectangle:
-						pos:self.width*0.22,self.height*5.5
-						size: 50,50
-            			source: 'pass_icon.png'
-				padding:self.width*0.2,self.height*0.3
-				text_size:self.width*0.8,self.height
-				hint_text:'Password'
+			TextInput:
+				hint_text:'password'
 				id:password
 				multiline: False
 				password:True
@@ -174,48 +37,55 @@
 				orientation: 'horizontal'
 				CheckBox:
 					id:'check'
-				MyLabel:
+				Label:
 					size_hint: 6, 1
-				MyLabel:
+				Label:
 					size_hint: 4, 1
 					text: 'Запомнить'
-			MyButton:
+			Button:
 				text: 'Войти в систему'
 				on_release: root.enter_system()
-			MyButton:
+			Button:
 				text: 'Зарегистрироваться'
 				on_release: root.reg()
 			
 <AuthorizationScreen>:
 	ScrollView:
 		do_scroll_x:False
-		MyBoxLayout:
+		BoxLayout:
 			size_hint:None,None
 			width:root.width
 			height:root.height*1.1
+			orientation: 'vertical'
 			padding: self.width*0.15,self.height*0.03,self.width*0.15,self.height*0.03
 			spacing: self.height*0.02
-			MyLabel:
+#			canvas:
+#				Color:
+#					rgb:0.859,0.357,0.259
+#				Line:
+#					points: root.width*0.12,root.height*0.42,root.width*0.88,root.height*0.42
+#					width: root.height*0.003
+			Label:
 				halign: 'center'
 				text: 'Пожалуйста, введите информацию\nо вашей учетной записи'
-			MyTextInput:
+			TextInput:
 				hint_text: 'user name*'
 				id:name
 				readonly: False
 				multiline: False
-			MyTextInput:
+			TextInput:
 				hint_text:'e-mail*'
 				id:e_mail
 				multiline: False
-			MyTextInput:
+			TextInput:
 				hint_text:'password*'
 				id:password
 				multiline: False
-			MyTextInput:
+			TextInput:
 				hint_text:'re-enter password*'
 				id:re_password
 				multiline: False
-			MyTextInput:
+			TextInput:
 				hint_text:'+7 911 111-11-11'
 				input_type:'number'
 				id:phone
@@ -223,59 +93,79 @@
 			BoxLayout:
 				orientation: 'horizontal'
 				spacing:self.width*0.12
-				MyButton:
+				Button:
 					text:'Смс-код'
 					size_hint: 5, 1
 					on_release: root.code_sms()
-				MyTextInput:
+				TextInput:
 					hint_text:'1111'
 					input_type:'number'
 					id:code
 					size_hint: 3, 1
 				CheckBox:
 					id:code_check
-			MyLabel:
+			Label:
 				halign: 'center'
 				text: 'Пожалуйста, введите данные\nобщего пространства'
 			BoxLayout:
 				orientation: 'horizontal'
 				spacing:self.width*0.12
-				MyToggleButton:
+				ToggleButton:
 					text:'New'
 					group:'space'
 					id:new_space
-				MyLabel:
+#				background_normal: 'atlas://images/1/myatlas/button'
+#				background_normal:'adddd.png'
+#				background_down:'add_down.png'
+#				Image:
+#					source: 'add.png'
+#					pos: self.pos
+#					size: 10,10
+				Label:
 					size_hint: 2, 1
-				MyToggleButton:
+				ToggleButton:
 					text:'Old'
 					group:'space'
 					id:cur_space
-			MyTextInput:
+			TextInput:
 				hint_text: 'name'
 				id:space_name
 				multiline: False
-			MyTextInput:
+			TextInput:
 				hint_text:'password'
 				id:space_password
 				multiline:False
 				password:True
-			MyButton:
+			Button:
 				text: 'Зарегистрироваться'
 				on_release: root.register()
 <MainScreen>:
-	MyBoxLayout:
+	BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgb:0.859,0.357,0.259
+			Rectangle:
+				pos: 0, self.height*0.9
+				size: self.width,self.height*0.1
 		StackLayout:
 			size_hint:1,.1
 			orientation: 'tb-lr'
 			spacing:self.width*0.02
-			MenuButton:
+			Button:
 				on_release:root.manager.current = 'menu'
-				size_hint:.1,1
-			UpLabel:
+				size_hint:.2,1
+			Label:
 				text: 'Мой холодильник'
-				size_hint:.9,1
-		MyBoxLayout:
+				size_hint:.6,1
+				bold:True
+			Image:
+				source:'1.png'
+				size_hint:.2,1
+				allow_stretch:True
+		BoxLayout:
 			size_hint:1,.9
+			orientation: 'vertical'
 			padding: self.width*0.1,self.height*0.05,self.width*0.1,self.height*0.05
 			spacing: self.height*0.02
 			LLabel:
@@ -301,114 +191,155 @@
 			Spinner:
 				size_hint_y:1
 				id:spin_products
+				
 			ScrollView:
 				scroll_distance:15
 				size_hint_y:4
 				do_scroll_x:False
-				MyBoxLayout:
+				BoxLayout:
 					size_hint:None,None
 					width:root.width*0.8
 					height:root.height*0.5
+					orientation:'vertical'
 					id:products
           
 <TasksScreen>:
-    MyBoxLayout:
+    BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgb:0.859,0.357,0.259
+			Rectangle:
+				pos: 0, self.height*0.9
+				size: self.width,self.height*0.1
 		StackLayout:
 			size_hint:1,.1
 			orientation: 'tb-lr'
 			spacing:self.width*0.02
-			MenuButton:
+			Button:
 				on_release:root.manager.current = 'menu'
-				size_hint:.1,1
-			UpLabel:
+				size_hint:.2,1
+			Label:
 				text: 'Мои задания'
-				size_hint:.9,1
-
-		MyBoxLayout:
+				size_hint:.6,1
+				bold:True
+			Image:
+				source:'1.png'
+				size_hint:.2,1
+				allow_stretch:True
+		BoxLayout:
 			size_hint:1,.9
+			orientation: 'vertical'
 			padding: self.width*0.1,self.height*0.02,self.width*0.1,self.height*0.05
 			spacing: self.height*0.02
 			ScrollView:
 				do_scroll_x:False
-				MyBoxLayout:
+				BoxLayout:
 					size_hint:None,None
 					width:root.width*0.8
 					height:root.height*1.1
+					orientation:'vertical'
 					id:task_box
 								
 <TaskEditScreen>:
-	MyBoxLayout:
+	BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgb:0.859,0.357,0.259
+			Rectangle:
+				pos: 0, self.height*0.9
+				size: self.width,self.height*0.1
 		StackLayout:
 			size_hint:1,.1
 			orientation: 'tb-lr'
 			spacing:self.width*0.02
-			MenuButton:
+			Button:
 				on_release:root.manager.current = 'menu'
-				size_hint:.1,1
-			UpLabel:
+				size_hint:.2,1
+			Label:
 				text: 'Изменить задание'
-				size_hint:.9,1
+				size_hint:.6,1
+				bold:True
 				id:title
-		MyBoxLayout:
+			Image:
+				source:'1.png'
+				size_hint:.2,1
+				allow_stretch:True
+		BoxLayout:
 			size_hint:1,.9
+			orientation: 'vertical'
 			padding: self.width*0.15,self.height*0.01,self.width*0.15,self.height*0.02
 			spacing: self.height*0.02
-			MyTextInput:
+			TextInput:
 				hint_text:'Title'
 				size_hint:1,.3
 			ScrollView:
 				do_scroll_x:False
-				MyBoxLayout:
+				BoxLayout:
 					size_hint:None,None
 					width:root.width*0.7
 					height:root.height*0.5
+					orientation:'vertical'
 					id:product_box
-			MyLabel:
+			Label:
 				halign:'center'
 				text:'Выберите пользователей, которым\nбудет доступно задание и смс'
 				size_hint:1,0.5
 			GridLayout:
 				cols:4
 				id:grid
-			MyButton:
+			Button:
 				size_hint:1,.3
 				text:'Создать'
 				on_release: root.create_task()
 				
 <ProductsScreen>:
-	MyBoxLayout:
+	BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgb:0.859,0.357,0.259
+			Rectangle:
+				pos: 0, self.height*0.9
+				size: self.width,self.height*0.1
 		StackLayout:
 			size_hint:1,.1
 			orientation: 'tb-lr'
 			spacing:self.width*0.02
-			MenuButton:
+			Button:
 				on_release:root.manager.current = 'menu'
-				size_hint:.1,1
-			UpLabel:
+				size_hint:.2,1
+			Label:
 				text: 'Мои продукты'
-				size_hint:.9,1
+				size_hint:.6,1
 				bold:True
-		MyBoxLayout:
+			Image:
+				source:'1.png'
+				size_hint:.2,1
+				allow_stretch:True
+		BoxLayout:
 			size_hint:1,.9
+			orientation: 'vertical'
 			padding: self.width*0.1,self.height*0.01,self.width*0.1,self.height*0.1
 			spacing: self.height*0.02
 			StackLayout:
 				size_hint:1,.1
 				orientation: 'lr-tb'
 				spacing:self.width*0.01
-				MyToggleButton:
+				ToggleButton:
 					text:'Избр.'
 					size_hint:.24,1
 					group:'sort'
-				MyToggleButton:
+				ToggleButton:
 					text:'А-Я'
 					size_hint:.24,1
 					group:'sort'
-				MyToggleButton:
+				ToggleButton:
 					text:'Срок'
 					size_hint:.24,1
 					group:'sort'
-				MyToggleButton:
+				ToggleButton:
 					text:'Группа'
 					size_hint:.24,1
 					group:'sort'
@@ -423,19 +354,30 @@
 
 			
 <ProductsInfScreen>:
-    MyBoxLayout:
+    BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgb:0.859,0.357,0.259
+			Rectangle:
+				pos: 0, self.height*0.9
+				size: self.width,self.height*0.1
 		StackLayout:
 			size_hint:1,.1
 			orientation: 'tb-lr'
 			spacing:self.width*0.02
-			MenuButton:
+			Button:
 				on_release:root.manager.current = 'menu'
-				size_hint:.1,1
-			UpLabel:
+				size_hint:.2,1
+			Label:
 				text: 'Информация'
-				size_hint:.9,1
-
-		MyLabel:
+				size_hint:.6,1
+				bold:True
+			Image:
+				source:'1.png'
+				size_hint:.2,1
+				allow_stretch:True
+		Label:
 			size_hint:1,.07
 			bold:True
 			id:name
@@ -444,22 +386,23 @@
 			orientation: 'horizontal'
 			padding: self.width*0.03,self.height*0.01,self.width*0.03,self.height*0.02
 			spacing: self.height*0.02
-			MyBoxLayout:
+			BoxLayout:
 				size_hint:.3,1
+				orientation: 'vertical'
 				spacing: self.height*0.02
 				Image:
 					size_hint:1,.4
 					id:image
 					allow_stretch:True
-				MyButton:
+				Button:
 					size_hint:1,.2
 					text:'В задание'
 					on_release:root.in_task()
-				MyButton:
+				Button:
 					size_hint:1,.2
 					text:'Штрих-код'
 					on_release:root.code()
-				MyLabel:
+				Label:
 					size_hint:1,.2
 
 
@@ -495,8 +438,9 @@
 					text:'Цена,руб'
 				LLabel:
 					id:price
-		MyBoxLayout:
+		BoxLayout:
 			size_hint:1,.45
+			orientation: 'vertical'
 			padding: self.width*0.03,0,self.width*0.03,self.height*0.03
 			spacing: self.height*0.01
 			LLabel:
@@ -506,8 +450,9 @@
 			ScrollView:
 				size_hint:1,.5
 				do_scroll_x:False
-				MyBoxLayout:
+				BoxLayout:
 					size_hint:None, None
+					orientation: 'vertical'
 					width:root.width*0.9
 					height:root.height*0.45
 					LLabel:
@@ -517,29 +462,47 @@
 				text:'Заметки'
 				bold:True
 				size_hint:1,.1
-			MyTextInput:
+			TextInput:
 				size_hint:1,.3
 				hint_text:'Yours comments about this product'
 				id:comments
 
 <SettingsScreen>:
-	MyBoxLayout:
+	BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgb:0.859,0.357,0.259
+			Rectangle:
+				pos: 0, self.height*0.9
+				size: self.width,self.height*0.1
+			Line:
+				points: self.width*0.03,self.height*0.75,self.width*0.97,self.height*0.75
+				width: self.height*0.003
+			Line:
+				points: self.width*0.03,self.height*0.39,self.width*0.97,self.height*0.39
+				width: self.height*0.003
 		StackLayout:
 			size_hint:1,.1
 			orientation: 'tb-lr'
 			spacing:self.width*0.02
-			MenuButton:
+			Button:
 				on_release:root.manager.current = 'menu'
-				size_hint:.1,1
-			UpLabel:
+				size_hint:.2,1
+			Label:
 				text: 'Настройки'
-				size_hint:.9,1
-
+				size_hint:.6,1
+				bold:True
+			Image:
+				source:'1.png'
+				size_hint:.2,1
+				allow_stretch:True
 		ScrollView:
 			size_hint:1,.9
 			do_scroll_x:False
-			MyBoxLayout:
+			BoxLayout:
 				size_hint:None, None
+				orientation: 'vertical'
 				padding: root.width*0.05,0,-root.width*0.05,root.height*0.01
 				spacing: root.height*0.02
 				width:root.width*0.9
@@ -575,19 +538,19 @@
 				GridLayout:
 					size_hint_y:.08
 					cols:7
-					MyToggleButton:
+					ToggleButton:
 						text:'ПН'
-					MyToggleButton:
+					ToggleButton:
 						text:'ВТ'
-					MyToggleButton:
+					ToggleButton:
 						text:'СР'
-					MyToggleButton:
+					ToggleButton:
 						text:'ЧТ'
-					MyToggleButton:
+					ToggleButton:
 						text:'ПТ'
-					MyToggleButton:
+					ToggleButton:
 						text:'СБ'
-					MyToggleButton:
+					ToggleButton:
 						text:'ВС'
 				GridLayout:
 					size_hint_y:.2
@@ -598,7 +561,7 @@
 						id:hour_slider
 						max:23
 						value:23 if (int(hour_text.text)>23) else float(int(hour_text.text))
-					MyTextInput:
+					TextInput:
 						text:str(int(hour_slider.value))
 						multiline:False
 						id:hour_text
@@ -610,31 +573,43 @@
 						max:59
 						value:59 if (int(minute_text.text)>59) else float(int(minute_text.text))
 						step:10
-					MyTextInput:
+					TextInput:
 						multiline:False
 						input_type:'number'
 						id:minute_text
 						text:str(int(minute_slider.value))
-				MyButton:
+				Button:
 					size_hint_y:.06
 					text:'Сохранить'
 					on_release:root.save_settings()
 				
 <StatisticsScreen>:
-    MyBoxLayout:
+    BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgb:0.859,0.357,0.259
+			Rectangle:
+				pos: 0, self.height*0.9
+				size: self.width,self.height*0.1
 		StackLayout:
 			size_hint:1,.1
 			orientation: 'tb-lr'
 			spacing:self.width*0.02
-			MenuButton:
+			Button:
 				on_release:root.manager.current = 'menu'
 				size_hint:.2,1
-			UpLabel:
+			Label:
 				text: 'Статистика'
 				size_hint:.6,1
-
-		MyBoxLayout:
+				bold:True
+			Image:
+				source:'1.png'
+				size_hint:.2,1
+				allow_stretch:True
+		BoxLayout:
 			size_hint:1,.9
+			orientation: 'vertical'
 			padding: self.width*0.06,self.height*0.05,self.width*0.06,self.height*0.1
 			spacing: self.height*0.02
 			GridLayout:
@@ -655,88 +630,91 @@
 			Image:
 				size_hint:1,4
 				id:image
-			MyLabel:
+			Label:
 				id:summary
-			MyButton:
+			Button:
 				size_hint:1,.7
 				text:'Показать статистику'
 				on_release:root.show_stat()
 	
 <AboutScreen>:
-    MyBoxLayout:
+    BoxLayout:
+		orientation: 'vertical'
+		canvas:
+			Color:
+				rgb:0.859,0.357,0.259
+			Rectangle:
+				pos: 0, self.height*0.9
+				size: self.width,self.height*0.1
 		StackLayout:
 			size_hint:1,.1
 			orientation: 'tb-lr'
 			spacing:self.width*0.02
-			MenuButton:
+			Button:
 				on_release:root.manager.current = 'menu'
 				size_hint:.2,1
-			UpLabel:
+			Label:
 				text: 'О программе'
 				size_hint:.6,1
-
-		MyBoxLayout:
+				bold:True
+			Image:
+				source:'1.png'
+				size_hint:.2,1
+				allow_stretch:True
+		BoxLayout:
 			size_hint:1,.9
+			orientation: 'vertical'
 			padding: self.width*0.1,self.height*0.02,self.width*0.1,self.height*0.1
 			spacing: self.height*0.1	
 			LLabel:
 				valign:'top'
 				id:about
 <MenuScreen>:
-	canvas.before:
-		Color:
-	    	rgb: 1, 1, 1
-	    Rectangle:
-	        pos: self.pos
-	        size: self.size
-	MyBoxLayout:
-		canvas.before:
+	StackLayout:
+	    orientation:'lr-tb'
+		minimum_width: .7
+		canvas:
 			Color:
-		    	rgb: 1, 1, 1
-		    Rectangle:
-		        pos: self.width*0.14,self.height*0.14
-		        size: self.width*0.75,self.height*0.71
-		        source:"menu_back.png"
-		size_hint:None,None
-		width:root.width
-		height:root.height
-		padding: self.width*0.15,self.height*0.15
-		spacing: self.height*0.005
-		MyLabel:
-			bold:True
-			halign:'center'
-			padding:-self.width*0.1,-self.height*0.1
-			text_size:self.width*0.9,self.height
-            text: 'Alex'
-			background:"btn_menu.png"
-			font_size: '17sp'
-
-		ListButton:
-            text: 'Главная'
-			on_release: root.manager.current = 'main'
-		ListButton:
-            text: 'Задания'
-			on_release: root.manager.current = 'tasks'
-		ListButton:
-            text: 'Доб.'
-			on_release: root.manager.current = 'task_edit'
-		ListButton:
-            text: 'Продукты'
-			on_release: root.manager.current = 'products'
-		ListButton:
-            text: 'Доб.'
-			on_release: root.manager.current = 'products_inf'
-		ListButton:
-            text: 'Статистика'
-			on_release: root.manager.current = 'statistics'
-		ListButton:
-            text: 'Настройки'
-			on_release: root.manager.current = 'settings'
-		ListButton:
-            text: 'О программе'
-			on_release: root.manager.current = 'about'
-		ListButton:
-            text: 'Выйти'
-			on_release: root.on_exit()	
+				rgb: 0.345, 0.345, 0.345
+			Rectangle:
+				pos: self.pos
+				size: self.size
 		Label:
-			text:''  
+            text: 'Alex'
+			size_hint: .5,.1
+		Button:
+            text: 'Настр.'
+			size_hint: .2,.1
+			on_release: root.manager.current = 'settings'
+		Button:
+            text: 'Главная'
+			size_hint: .7,.1
+			on_release: root.manager.current = 'main'
+		Button:
+            text: 'Задания'
+			size_hint: .5,.1
+			on_release: root.manager.current = 'tasks'
+		Button:
+            text: 'Доб.'
+			size_hint: .2,.1
+			on_release: root.manager.current = 'task_edit'
+		Button:
+            text: 'Продукты'
+			size_hint: .5,.1
+			on_release: root.manager.current = 'products'
+		Button:
+            text: 'Доб.'
+			size_hint: .2,.1
+			on_release: root.manager.current = 'products_inf'
+		Button:
+            text: 'Статистика'
+			size_hint: .7,.1
+			on_release: root.manager.current = 'statistics'
+		Button:
+            text: 'О программе'
+			size_hint: .7,.1
+			on_release: root.manager.current = 'about'
+		Button:
+            text: 'Выйти'
+			size_hint: .7,.1
+			on_release: root.on_exit()	  

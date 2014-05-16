@@ -1,7 +1,7 @@
 ﻿import kivy
-
+  
 from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.boxlayout import BoxLayout 
 
 from kivy.uix.listview import ListView
 from kivy.lang import Builder
@@ -14,48 +14,96 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.togglebutton import ToggleButton
 from kivy.graphics import Canvas
-from kivy.config import Config
+from kivy.config import Config   
 from kivy.uix.popup import Popup
+from kivy.uix.menupopup import MenuPopup      
+  
 #from kivy.uix.slider import Slider
 #from kivy.uix.spinner import Spinner
 from kivy.properties import StringProperty, ObjectProperty
 #from kivy.uix.carousel import Carousel
 #from kivy.animation import Animation
-
-
-
-
+ 
+ 
+              
+ 
+   
 from kivy.uix.screenmanager import SlideTransition,SwapTransition,WipeTransition,FadeTransition
 #from kivy.graphics import graphics
 #Config.set('graphics', 'width', '720')
-#Config.set('graphics', 'height', '1280')
-Config.set('graphics', 'width', '280')
-Config.set('graphics', 'height', '500')
-
-Builder.load_file('dip.kv')
-
-
-'''
+#Config.set('graphics', 'height', '1280') 
+Config.set('graphics', 'width', '422')
+Config.set('graphics', 'height', '750')
+         
+Builder.load_file('dip.kv')    
+      
+         
+      
+'''  
     def save(self, path, selection):
         _file = codecs.open(selection, 'w', encoding='utf8')
         _file.write(self.text)
         Window.title = selection[selection.rfind(os.sep)+1:]
         _file.close()
-        self.dismiss()
-'''
-class LLabel(Label):
-	pass
-# Declare screens
-class MyScreen(Screen):
-	def show_popup(self,but_text,label_text,title_text):
-		content_popup = Button(text=but_text,size_hint=(.5,1),pos_hint={'center_x':.5,'y':.0})
-		content = BoxLayout(orientation='vertical',padding=(0,self.height*0.01))
-		content.add_widget(Label(text=label_text,halign='center',size_hint=(1,2)))
-		content.add_widget(content_popup)
-		popup = Popup(title=title_text,content=content,size_hint=(.9,.3))
-		content_popup.bind(on_release=popup.dismiss)
-		popup.open()	
-class LoginScreen(MyScreen):
+        self.dismiss() 
+'''  
+                
+class MenuButton(Button):
+    
+    pass   
+class ListButton(Button):
+    pass
+class MenuPopup(MenuPopup):   
+    def on_btn_settings(self): 
+        self.manager.current='settings' 
+             
+                
+class MyBoxLayout(BoxLayout):
+    pass            
+class MyPopup(Popup):   
+    background="txt_input1.png"  
+
+class LLabel(Label): 
+	color=(0.176,0.39,0.176,1)
+           
+     
+class MyLabel(Label):
+    color=(0.176,0.39,0.176,1)
+class UpLabel(MyLabel):
+    color=(0.176,0.39,0.176,1)    
+class MyTextInput(TextInput):         
+    background_normal="txt_input1.png"
+    background_active="txt_input_active1.png"
+    hint_text_color=(0.349,0.709,0.349,1)
+    foreground_color=(0.176,0.39,0.176,1)
+class IconTextInput(TextInput):
+    hint_text_color=(0.349,0.709,0.349,1)
+    foreground_color=(0.176,0.39,0.176,1)
+class MyButton(Button):   
+#    background_normal="txt_input.png"
+#    background_down="txt_input_active.png"
+#    color=(0.176,0.39,0.176,1)\
+    pass
+class MyToggleButton(ToggleButton):
+    background_normal="txt_input.png" 
+    background_down="txt_input_active.png" 
+    color=(0.176,0.39,0.176,1)
+# Declare screens    
+class MyScreen(Screen):  
+    def show_popup(self,but_text,label_text,title_text):
+        content_popup = MyButton(text=but_text,size_hint=(.5,1),pos_hint={'center_x':.5,'y':.0},markup=True)
+        content = BoxLayout(padding=(0,self.height*0.01),orientation='vertical')
+        content.add_widget(MyLabel(text=label_text,halign='center',size_hint=(1,2),markup=True))
+        content.add_widget(content_popup)
+        popup = MyPopup(title=title_text,content=content,size_hint=(.9,.3))
+        content_popup.bind(on_release=popup.dismiss)
+        popup.open()
+    def show_menupopup(self): 
+        popup = MenuPopup()
+        popup.ids.set_btn.bind(on_release=popup.on_btn_settings())
+        popup.open()  
+     
+class LoginScreen(MyScreen): 
 	global i
 	i=0
 	def reg(self):
@@ -63,13 +111,13 @@ class LoginScreen(MyScreen):
 	def enter_system(self):
 		global i
 		i+= 1
-		if i%2:
+		if i%2:  
 			self.show_popup('Ok','Неверное имя пользователя\nили пароль','Ошибка авторизации')
 		else: 
 			self.manager.current = 'main'
 
 class AuthorizationScreen(MyScreen):
-	global i
+	global i 
 	i=0
 	def register(self):
 		global i
@@ -96,20 +144,20 @@ class MainScreen(MyScreen):
 			title=fields[2]
 			prod1=fields[3]
 			prod2=fields[4]
-			prod3=fields[5]
+			prod3=fields[5]   
 			stock=(date,name,title,prod1,prod2,prod3)
 			task.append(stock)
 		for date,name,title,prod1,prod2,prod3 in task:
-			box=BoxLayout(size_hint=(.33,1),orientation='vertical')
-			box.add_widget(Button(text=str(date)+' '+str(name)+' '+str(title),color=[1,1,0,1],
+			box=MyBoxLayout(size_hint=(.33,1))
+			box.add_widget(MyButton(text=str(date)+' '+str(name)+' '+str(title),color=[1,1,0,1],
 					on_release=self.task_trans(title)))
-			box.add_widget(Label(text=str(prod1)))
-			box.add_widget(Label(text=str(prod2)))
-			box.add_widget(Label(text=str(prod3)))
+			box.add_widget(MyLabel(text=str(prod1)))
+			box.add_widget(MyLabel(text=str(prod2)))
+			box.add_widget(MyLabel(text=str(prod3)))
 			self.ids.tasks_box.add_widget(box)
-			self.ids.products.add_widget(Button(text=str(prod1),on_release=self.product_trans(prod1)))
-			self.ids.products.add_widget(Button(text=str(prod2),on_release=self.product_trans(prod2)))
-			self.ids.products.add_widget(Button(text=str(prod3),on_release=self.product_trans(prod3)))
+			self.ids.products.add_widget(MyButton(text=str(prod1),on_release=self.product_trans(prod1)))
+			self.ids.products.add_widget(MyButton(text=str(prod2),on_release=self.product_trans(prod2)))
+			self.ids.products.add_widget(MyButton(text=str(prod3),on_release=self.product_trans(prod3)))
 	def product_trans(self,prod_name):
 		pass
 	def	product_inf(self,prod_name):
@@ -133,11 +181,11 @@ class TasksScreen(MyScreen):
 			stock=(date,name,title,prod1,prod2,prod3)
 			task.append(stock)
 		for date,name,title,prod1,prod2,prod3 in task:
-			self.ids.task_box.add_widget(Button(text=str(date)+' '+str(name)+' '+str(title),color=[1,1,0,1],
+			self.ids.task_box.add_widget(MyButton(text=str(date)+' '+str(name)+' '+str(title),color=[1,1,0,1],
 					on_release=self.task_trans(title)))
-			self.ids.task_box.add_widget(Label(text=str(prod1)))
-			self.ids.task_box.add_widget(Label(text=str(prod2)))
-			self.ids.task_box.add_widget(Label(text=str(prod3)))
+			self.ids.task_box.add_widget(MyLabel(text=str(prod1)))
+			self.ids.task_box.add_widget(MyLabel(text=str(prod2)))
+			self.ids.task_box.add_widget(MyLabel(text=str(prod3)))
 	def task_trans(self,task_name):
 		pass
 			
@@ -153,9 +201,9 @@ class TaskEditScreen(MyScreen):
 			stock=(prod1,prod2,prod3)
 			task.append(stock)
 		for prod1,prod2,prod3 in task:
-			self.ids.product_box.add_widget(ToggleButton(text=str(prod1),id=prod1))
-			self.ids.product_box.add_widget(ToggleButton(text=str(prod2),id=prod1))
-			self.ids.product_box.add_widget(ToggleButton(text=str(prod3),id=prod1))
+			self.ids.product_box.add_widget(MyToggleButton(text=str(prod1),id=prod1))
+			self.ids.product_box.add_widget(MyToggleButton(text=str(prod2),id=prod1))
+			self.ids.product_box.add_widget(MyToggleButton(text=str(prod3),id=prod1))
 		person=[]
 		self.ids.grid.clear_widgets()
 		for line in open('users.txt'):
@@ -163,14 +211,14 @@ class TaskEditScreen(MyScreen):
 			name=fields[0]
 			stock=(name)
 			person.append(stock)
-		self.ids.grid.add_widget(Label())
+		self.ids.grid.add_widget(MyLabel())
 		self.ids.grid.add_widget(Image(source='1.png',allow_stretch=True))
-		self.ids.grid.add_widget(Label())
+		self.ids.grid.add_widget(MyLabel())
 		self.ids.grid.add_widget(Image(source='1.png',allow_stretch=True))
 		for name in person:
-			self.ids.grid.add_widget(Label(text=str(name),halign='left',size_hint=(3,1)))
+			self.ids.grid.add_widget(MyLabel(text=str(name),halign='left',size_hint=(3,1)))
 			self.ids.grid.add_widget(CheckBox(id=name+'space'))
-			self.ids.grid.add_widget(Label())
+			self.ids.grid.add_widget(MyLabel())
 			self.ids.grid.add_widget(CheckBox(id=name+'sms'))
 	def create_task(self):
 		self.show_popup('Ok','Задание опубликовано!','Добавление задания')
@@ -189,15 +237,15 @@ class ProductsScreen(MyScreen):
 			stock=(cat,prod1,prod2,prod3)
 			prod.append(stock)
 		for cat,prod1,prod2,prod3 in prod:
-			self.ids.grid_products.add_widget(ToggleButton(size_hint=(.1,1)))
-			self.ids.grid_products.add_widget(Label(text=str(prod1),size_hint=(.6,1),color=[1,1,0,1]))
-			self.ids.grid_products.add_widget(Label(text=str(cat),size_hint=(.3,1)))
-			self.ids.grid_products.add_widget(ToggleButton(size_hint=(.1,1)))
-			self.ids.grid_products.add_widget(Label(text=str(prod2),size_hint=(.6,1),color=[1,1,0,1]))
-			self.ids.grid_products.add_widget(Label(text=str(cat),size_hint=(.3,1)))
-			self.ids.grid_products.add_widget(ToggleButton(size_hint=(.1,1)))
-			self.ids.grid_products.add_widget(Label(text=str(prod3),size_hint=(.6,1),color=[1,1,0,1]))
-			self.ids.grid_products.add_widget(Label(text=str(cat),size_hint=(.3,1)))
+			self.ids.grid_products.add_widget(MyToggleButton(size_hint=(.1,1)))
+			self.ids.grid_products.add_widget(MyLabel(text=str(prod1),size_hint=(.6,1),color=[1,1,0,1]))
+			self.ids.grid_products.add_widget(MyLabel(text=str(cat),size_hint=(.3,1)))
+			self.ids.grid_products.add_widget(MyToggleButton(size_hint=(.1,1)))
+			self.ids.grid_products.add_widget(MyLabel(text=str(prod2),size_hint=(.6,1),color=[1,1,0,1]))
+			self.ids.grid_products.add_widget(MyLabel(text=str(cat),size_hint=(.3,1)))
+			self.ids.grid_products.add_widget(MyToggleButton(size_hint=(.1,1)))
+			self.ids.grid_products.add_widget(MyLabel(text=str(prod3),size_hint=(.6,1),color=[1,1,0,1]))
+			self.ids.grid_products.add_widget(MyLabel(text=str(cat),size_hint=(.3,1)))
 
 class ProductsInfScreen(MyScreen):
 	def on_pre_enter(self):
@@ -231,8 +279,8 @@ class SettingsScreen(MyScreen):
 		self.ids.record_spin.text=str(person[0][2])
 		self.ids.record_spin.values=(person[0][2],)
 		for name,phone,mail in person[1:]:
-			self.ids.users_grid.add_widget(TextInput(text=str(name),valign='middle',halign='left',size_hint_x=.8))
-			self.ids.users_grid.add_widget(Label(text=str(phone)+'\n'+str(mail),valign='middle',halign='right'))
+			self.ids.users_grid.add_widget(MyTextInput(text=str(name),valign='middle',halign='left',size_hint_x=.8))
+			self.ids.users_grid.add_widget(MyLabel(text=str(phone)+'\n'+str(mail),valign='middle',halign='right'))
 		
 	def save_settings(self):
 		self.show_popup('Ok','Настройки успешно сохранены!','Настройки')
@@ -250,8 +298,11 @@ class StatisticsScreen(MyScreen):
 		self.ids.image.source='stat.PNG'
 		self.ids.image.allow_stretch=True
 		self.ids.summary.text='За весь период куплено 233 товара'
-		pass
-class MenuScreen(MyScreen):
+		pass      
+class MenuScreen(MyScreen): 
+    def btn_set(self):
+        mscr=MyScreen()
+        mscr.manager.current='settings' 
     def on_exit(self):
 		exit()
 class AboutScreen(MyScreen):
@@ -272,11 +323,11 @@ class AboutScreen(MyScreen):
 	return 
 	def effect_y(touch):
 
-return	
-'''
+return	 
+'''   
     
 class DipApp(App):
-	
+	        
 	def build(self):
 		sm = ScreenManager()
 		sm.transition = SlideTransition(direction='right')
@@ -291,11 +342,11 @@ class DipApp(App):
 		sm.add_widget(StatisticsScreen(name='statistics'))
 		sm.add_widget(MenuScreen(name='menu'))
 		sm.add_widget(AboutScreen(name='about'))
-		sm.current = 'login'
+		sm.current = 'main'          
 		return sm
-		
-	
-
+		          
+	       
+  
 if __name__ in ('__main__', '__android__'):
     DipApp().run()
 
